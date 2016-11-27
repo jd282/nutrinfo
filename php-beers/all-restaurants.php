@@ -1,10 +1,11 @@
 <?php
-  if (!isset($_POST['student'])) {
+ /*  
+if (!isset($_POST['student'])) {
     echo "You need to specify a student. Please <a href='all-students.php'>try again</a>.";
     die();
   }
   $student = $_POST['student'];
-
+*/
   // In production code, you might want to "cleanse" the $drinker string
   // to remove potential hacks before doing something with it (e.g.,
   // passing it to the DBMS).  That said, using prepared statements
@@ -37,7 +38,7 @@ Select where you ate:<br/>
 <?php
       do {
         // echo produces output HTML:
-        echo "<input type='radio' name='restaurantid' value='" . $myrow[0] . "'/>";
+        echo "<input type='radio' name='restaurantid' value='" . $myrow[0] . "'required/>";
         echo $myrow[2] . "<br/>";
       } while ($myrow = $st->fetch());
       // Below we will see the use of a "short open tag" that is equivalent

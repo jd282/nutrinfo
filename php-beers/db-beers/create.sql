@@ -1,3 +1,13 @@
+CREATE TABLE Users
+(
+user_id SERIAL PRIMARY KEY,
+user_email VARCHAR(100) NOT NULL UNIQUE,
+user_password VARCHAR(64) NOT NULL,
+user_firstname VARCHAR(50) NOT NULL,
+user_lastname VARCHAR(50) NOT NULL,
+user_registered TIMESTAMP NOT NULL
+);
+
 CREATE TABLE Location
 (
 locationID INTEGER NOT NULL PRIMARY KEY, 

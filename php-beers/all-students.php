@@ -23,7 +23,7 @@ Select your name below:<br/>
 <?php
       do {
         // echo produces output HTML:
-        echo "<input type='radio' name='student' value='" . $myrow[1] . "'/>";
+        echo "<input type='radio' name='student' value='" . $myrow[1] . "' required/>";
         echo $myrow[1] . "<br/>";
       } while ($myrow = $st->fetch());
       // Below we will see the use of a "short open tag" that is equivalent
