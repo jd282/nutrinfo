@@ -1,45 +1,58 @@
 <?php
+  session_start(); 
   if (!isset($_POST['food'])) {
     echo "You need to specify a food. Please <a href='all-restaurants.php'>try again</a>.";
     die();
   }
   $food = $_POST['food'];
-  // In production code, you might want to "cleanse" the $drinker string
-  // to remove potential hacks before doing something with it (e.g.,
-  // passing it to the DBMS).  That said, using prepared statements
-  // (see below for details) can prevent SQL injection attack even if
-  // $drinker contains potentially malicious character sequences.
 ?>
 
 <html>
-<head><title>Your Information: <?= $drinker ?></title></head>
+<head><title>Nutrinfo</title></head>
 <body>
 
-<h1>Drinker Information: <?=$drinker ?></h1>
+<h1>Your Information: </h1>
 <?php
   try {
     // Including connection info (including database password) from outside
     // the public HTML directory means it is not exposed by the web server,
     // so it is safer than putting it directly in php code:
-    include("/etc/php5/pdo-beers.php");
+    include("/etc/php5/pdo-mine.php");
     $dbh = dbconnect();
   } catch (PDOException $e) {
     print "Error connecting to the database: " . $e->getMessage() . "<br/>";
     die();
   }
   try {
-    // One could construct a parameterized query manually as follows,
-    // but it is prone to SQL injection attack:
-    // $st = $dbh->query("SELECT address FROM Drinker WHERE name='" . $drinker . "'");
-    // A much safer method is to use prepared statements:
-    $st = $dbh->prepare("SELECT address FROM Drinker WHERE name=?");
-    $st->execute(array($drinker));
-    if ($st->rowCount() == 0) {
-      die('There is no drinker named ' . $drinker . ' in the database.');
-    } else if ($st->rowCount() > 1) {
-      die('Something is wrong --- there are ' . $count . ' drinkers named ' . $drinker . ' in the database.');
+  
+  	$date = date('Y-m-d'); 
+	$firstname = $_SESSION['user_firstname']; 
+	$userid = $_SESSION['user_id']; 
+	
+	//print goal information
+	$goals_query = "SELECT * FROM Goals WHERE goals_userid=" . $userid; 
+	$g_query = $dbh->query($goals_query); 
+	$g_row = $g_query->fetch(); 
+	echo "Your calorie goal is between " . $g_row[7] . " and " . $g_row[2] . " calories. <br/>"; 
+    
+    //insert new food into Ate table in database
+    $insert_query = "INSERT INTO Ate(ate_userid, studentNetID, foodID, eatDate) VALUES('" . $userid . "', 'jd282', '" . $food . "', '" . $date . "')";
+    $insert_result = $dbh->query($insert_query); 
+    
+    //calculate number of calories consumed on current day
+	$cal_query = "SELECT COALESCE(SUM(calories),0) FROM Ate, Food WHERE Food.foodid = Ate.foodid and eatDate='$date' and ate_userid=" . $userid;
+	$c_query = $dbh->query($cal_query);
+	$c_row = $c_query->fetch(); 
+    echo "You have consumed " . $c_row[0] ." calories today. <br/>"; 
+    
+    //Display foods that user has eaten
+    $query = $dbh->query("SELECT * FROM Ate,Food WHERE Food.foodid = Ate.foodid and ate_userid=" . $userid . "ORDER BY eatDate DESC"); 
+	echo "You ate: <br/>"; 
+    while($row = $query->fetch()) {
+    	echo $row['name'] . " " . $row['calories'] . " cal on ". $row[3] . "<br/>";
     }
-    $myrow = $st->fetch();
+    
+    /*
     echo "Address: ", $myrow['address'];
 
     echo "<br/>\n";
@@ -75,15 +88,20 @@
     if ($count == 0) {
       echo "none";
     }
-
+*/
     echo "<br/>\n";
 
   } catch (PDOException $e) {
     print "Database error: " . $e->getMessage() . "<br/>";
     die();
   }
+  /*
+  or <a href='edit-drinker.php?drinker=<?= $drinker ?>'>edit</a> the information.
+  */
 ?>
-Go <a href='all-drinkers.php'>back</a>
-or <a href='edit-drinker.php?drinker=<?= $drinker ?>'>edit</a> the information.
+<a href='all-restaurants.php'>Add more food!</a>
+<br/>
+Go <a href='index.php'>home</a>
+
 </body>
 </html>

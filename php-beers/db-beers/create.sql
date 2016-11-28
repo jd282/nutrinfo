@@ -74,6 +74,7 @@ foodPoints FLOAT NOT NULL CHECK(foodPoints >= 0 AND foodPoints <= 3300)
 
 CREATE TABLE Ate
 (
+ate_userid INTEGER NOT NULL REFERENCES Users(user_id),
 studentNetID VARCHAR(10) NOT NULL,
 foodID INTEGER NOT NULL REFERENCES Food(FoodID),
 eatDate DATE NOT NULL
@@ -81,7 +82,8 @@ eatDate DATE NOT NULL
 
 CREATE TABLE Goals
 (
-studentNetID VARCHAR(10) NOT NULL, 
+goals_userid INTEGER NOT NULL REFERENCES Users(user_id),
+studentNetID VARCHAR(10) NOT NULL ,
 maxCals INTEGER CHECK(maxCals IS NULL OR maxCals >= 0),
 maxFat INTEGER CHECK(maxFat IS NULL OR maxFat >= 0),
 maxSug INTEGER CHECK(maxSug IS NULL OR maxSug >= 0),

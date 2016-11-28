@@ -1,4 +1,5 @@
 <?php
+  session_start(); 
  /*  
 if (!isset($_POST['student'])) {
     echo "You need to specify a student. Please <a href='all-students.php'>try again</a>.";

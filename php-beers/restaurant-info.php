@@ -5,12 +5,6 @@
   }
 
   $restaurantid = $_POST['restaurantid'];
-
-  // In production code, you might want to "cleanse" the $drinker string
-  // to remove potential hacks before doing something with it (e.g.,
-  // passing it to the DBMS).  That said, using prepared statements
-  // (see below for details) can prevent SQL injection attack even if
-  // $drinker contains potentially malicious character sequences.
 ?>
 
 <?php
@@ -36,17 +30,19 @@
 
 <form method="post" action="student-info.php">
 Select the food you ate below:<br/>
+<br />
 <?php
+	  session_start(); 
       do {
         // echo produces output HTML:
-        echo "<input type='radio' name='food' value='" . $myrow['foodID'] . "'required/>";
+        echo "<input type='radio' name='food' value='" . $myrow[0] . "'required/>";
         echo $myrow[1] . "<br/>";
       } while ($myrow = $st->fetch());
       // Below we will see the use of a "short open tag" that is equivalent
       // to echoing the enclosed expression.
 ?>
 <?= $st->rowCount() ?> food(s) found in the database.<br/>
-<input type="submit" value="GO!"/>
+<input type="submit" value="Add!"/>
 </form>
 <?php
     } else {

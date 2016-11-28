@@ -1,3 +1,7 @@
+<?php
+  session_start(); 
+?>
+
 <html>
 
 <head>
@@ -14,10 +18,12 @@ Nutrintional info on Duke's campus!
 
 <p>
 <a href="all-restaurants.php">Add food you ate!</a>
-<br />
+<br/>
 <a href="recommendation.php">Need a food recommendation?</a>
-<br />
-<a href="edit_goal.php"> Edit your goal</a>
+<br/>
+<a href="profile.php"> View your profile</a>
+<br/>
+<a href="menu.php"> Look at restaurant menus</a>
 </p>
 
 

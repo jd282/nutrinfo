@@ -27,24 +27,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     	*/
 		$dbconn = pg_connect("host=localhost dbname=nutrinfo user=vagrant password=dbpasswd")
     		or die('Could not connect: ' . pg_last_error());
-        $result = pg_prepare($dbconn, "my_query", "SELECT user_id FROM Users WHERE user_email= $1 and user_password=$2");
+        $result = pg_prepare($dbconn, "my_query", "SELECT user_id,user_firstname FROM Users WHERE user_email= $1 and user_password=$2");
 		$result = pg_execute($dbconn, "my_query", array($email,$password));
 		$myrow = pg_fetch_assoc($result);
-        
-   		 /*
-        $query = $dbh->prepare("SELECT `user_id` FROM `users` WHERE `user_email` = ? and `user_password` = PASSWORD(?)");
-        $query->bind_param("ss", $email, $password);
-        $query->execute();
-        $query->bind_result($userid);
-        $query->fetch();
-        $query->close();
-        */
         
         if(!empty($myrow)) {
             session_start();
             $userid = $myrow['user_id'];
-
            	$session_key = session_id();
+           	$firstname = $myrow['user_firstname'];
+            $_SESSION['user_id'] = $userid;
+            $_SESSION['session_key'] = $session_key;
+            $_SESSION['user_firstname'] = $firstname; 
+            
             
             header('Location: index.php');
         }
