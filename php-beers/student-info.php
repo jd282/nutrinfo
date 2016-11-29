@@ -25,15 +25,21 @@
   }
   try {
   
-  	$date = date('Y-m-d'); 
+  	$date = date('Y-m-d H:i:s'); 
 	$firstname = $_SESSION['user_firstname']; 
 	$userid = $_SESSION['user_id']; 
-	
+
 	//print goal information
-	$goals_query = "SELECT * FROM Goals WHERE goals_userid=" . $userid; 
+	$goals_query = "SELECT maxCals,minCals FROM Goals WHERE goals_userid=" . $userid; 
 	$g_query = $dbh->query($goals_query); 
 	$g_row = $g_query->fetch(); 
-	echo "Your calorie goal is between " . $g_row[7] . " and " . $g_row[2] . " calories. <br/>"; 
+	
+	if(!empty($g_row)){
+		echo "Your calorie goal is between " . $g_row[1] . " and " . $g_row[0] . " calories. <br/>"; 
+	}
+	else{
+		echo "You have not set a goal yet! Click <a href='#'>here</a> to set one. <br/>"; 
+	}
     
     //insert new food into Ate table in database
     $insert_query = "INSERT INTO Ate(ate_userid, studentNetID, foodID, eatDate) VALUES('" . $userid . "', 'jd282', '" . $food . "', '" . $date . "')";
@@ -51,44 +57,7 @@
     while($row = $query->fetch()) {
     	echo $row['name'] . " " . $row['calories'] . " cal on ". $row[3] . "<br/>";
     }
-    
-    /*
-    echo "Address: ", $myrow['address'];
 
-    echo "<br/>\n";
-
-    echo "Beer(s) liked: ";
-    $st = $dbh->prepare("SELECT beer FROM Likes WHERE drinker=?");
-    $st->execute(array($drinker));
-    $count = 0;
-    foreach ($st as $myrow) {
-      $count++;
-      if ($count > 1) {
-        echo(", ");
-      }
-      echo $myrow['beer'];
-    }
-    if ($count == 0) {
-      echo "none";
-    }
-
-    echo "<br/>\n";
-
-    echo "Bar(s) frequented: ";
-    $st = $dbh->prepare("SELECT bar, times_a_week FROM Frequents WHERE drinker=?");
-    $st->execute(array($drinker));
-    $count = 0;
-    foreach ($st as $myrow) {
-      $count++;
-      if ($count > 1) {
-        echo(", ");
-      }
-      echo $myrow['bar'], " (", $myrow['times_a_week'], " time(s) a week)";
-    }
-    if ($count == 0) {
-      echo "none";
-    }
-*/
     echo "<br/>\n";
 
   } catch (PDOException $e) {

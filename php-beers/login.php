@@ -14,8 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     print "Error connecting to the database: " . $e->getMessage() . "<br/>";
     die();
   }
-
-    /*require_once('database.php'); */
     
     if(!empty($_POST["email"]) && !empty($_POST["password"])) {
         $email = $_POST["email"];

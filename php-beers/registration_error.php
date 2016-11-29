@@ -23,8 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     	$dbconn = pg_connect("host=localhost dbname=nutrinfo user=vagrant password=dbpasswd")
     		or die('Could not connect: ' . pg_last_error());
-    	
-    	//check if email is already registered and if so go to registration_error.php 	
+    		
     	$check_email = "SELECT * FROM Users WHERE user_email = $1";
     	$check_result = pg_prepare($dbconn, "my_q", $check_email);
     	$check_result = pg_execute($dbconn, "my_q", array($email));
@@ -36,12 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     		exit(); 
     	}
     	
-    	//insert registration info into the Users table 
     	$query = "INSERT INTO Users(user_id, user_email, user_password, user_firstname, user_lastname, user_registered) VALUES(DEFAULT, $1, $2, $3, $4, $5)";
    		$result = pg_prepare($dbconn, "my_query", $query);
    		$result = pg_execute($dbconn, "my_query", array($email,$password,$firstname,$lastname,$date));
    		
-   		header('Location: login.php');  
+        header('Location: login.php');
         
     } else {
         header('Location: login.php');
@@ -62,7 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     	<hgroup>
     		<h1>Registration</h1>
     	</hgroup>
-    </header>    
+    </header>  
+    <h2> This email already exists!! </h2>  
     <section id="content">
     	<form id='register' method='post' accept-charset='UTF-8'>
 			<fieldset>

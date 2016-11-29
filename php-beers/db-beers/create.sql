@@ -63,8 +63,8 @@ PRIMARY KEY(restaurantID, locationID, foodID)
 
 CREATE TABLE Student
 (
-studentNetID VARCHAR(10) NOT NULL PRIMARY KEY,
-fullName VARCHAR(256) NOT NULL, 
+student_userid INTEGER NOT NULL REFERENCES Users(user_id),
+studentNetID VARCHAR(10) NOT NULL,
 DoB DATE NOT NULL,
 sex VARCHAR(10) NOT NULL, 
 height INTEGER NOT NULL CHECK(height > 0 AND height <= 96),
@@ -77,7 +77,7 @@ CREATE TABLE Ate
 ate_userid INTEGER NOT NULL REFERENCES Users(user_id),
 studentNetID VARCHAR(10) NOT NULL,
 foodID INTEGER NOT NULL REFERENCES Food(FoodID),
-eatDate DATE NOT NULL
+eatDate TIMESTAMP NOT NULL
 );
 
 CREATE TABLE Goals
@@ -102,7 +102,7 @@ studentNetID VARCHAR(10) NOT NULL REFERENCES Student(studentNetID),
 warningDate DATE NOT NULL,
 message VARCHAR(70) NOT NULL CHECK(message IN ('You have exceeded your maximum daily calorie intake! :(', 'You have not reached your minimum daily calorie intake yet!'))
 );
-
+/*
 CREATE FUNCTION TF_food_ref() RETURNS TRIGGER AS $$
 BEGIN
 	--this trigger will alert the user if their calorie intake is above max goal or below min goal
@@ -138,3 +138,4 @@ CREATE TRIGGER TG_food_ref
   AFTER INSERT OR UPDATE ON Ate
   FOR EACH ROW
   EXECUTE PROCEDURE TF_food_ref();
+*/
