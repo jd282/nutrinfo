@@ -6,9 +6,43 @@ $email = null;
 $password = null;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	/*
+      try {
+    // Including connection info (including database password) from outside
+    // the public HTML directory means it is not exposed by the web server,
+    // so it is safer than putting it directly in php code:
+    include("/etc/php5/pdo-mine.php");
+    $dbh = dbconnect();
+  } catch (PDOException $e) {
+    print "Error connecting to the database: " . $e->getMessage() . "<br/>";
+    die();
+  }
+
     
-    require_once('database.php');
-    
+    if(!empty($_POST["email"]) && !empty($_POST["password"])) {
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        
+        $sql = "SELECT user_id FROM Users WHERE user_email= '" . $email . "' and user_password='" . $password . "'"; 
+   		$st = $dbh->query($sql);
+    	$myrow = $st->fetch();    
+    	
+		$dbconn = pg_connect("host=localhost dbname=nutrinfo user=vagrant password=dbpasswd")
+    		or die('Could not connect: ' . pg_last_error());
+        $result = pg_prepare($dbconn, "my_query", "SELECT user_id,user_firstname FROM Users WHERE user_email= $1 and user_password=$2");
+		$result = pg_execute($dbconn, "my_query", array($email,$password));
+		$myrow = pg_fetch_assoc($result);
+        
+        if(!empty($myrow)) {
+            session_start();
+            $userid = $myrow['user_id'];
+           	$session_key = session_id();
+           	$firstname = $myrow['user_firstname'];
+            $_SESSION['user_id'] = $userid;
+            $_SESSION['session_key'] = $session_key;
+            $_SESSION['user_firstname'] = $firstname; 
+            
+    */
     if(!empty($_POST["firstname"]) && !empty($_POST["lastname"]) && !empty($_POST["email"]) && !empty($_POST["password"])) {
         $firstname = $_POST["firstname"];
         $lastname = $_POST["lastname"];
