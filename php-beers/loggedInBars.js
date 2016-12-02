@@ -2,9 +2,9 @@ document.getElementById('topbar').innerHTML =
 	"<nav class='light-blue lighten-1' role='navigation'>" +
 	    "<div class='nav-wrapper container'><a id='logo-container' href='#' class='brand-logo'>Nutrinfo</a>" +
 	      "<ul class='right hide-on-med-and-down'>"+
-	        "<li><a href='all-restaurants.php'>Menus</a></li>" +
+	        "<li><a href='#'>Menus</a></li>" +
 	        "<li><a href='#'>Profile</a></li>" +
-	        "<li><a href='#'>Add Food</a></li>" +
+	        "<li><a href='all-restaurants.php'>Add Food</a></li>" +
 	        "<li><a href='#'>Goals</a></li>" +
 	        "<li><a href='profile.php'>My Profile</a></li>" +
 	        "<li><a href='index.html'>Log Out</a></li>" +

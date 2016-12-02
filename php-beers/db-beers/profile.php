@@ -39,37 +39,23 @@
     	$userid = $_SESSION['user_id']; 
     	
     	//print goal information
-    	$goals_query = "SELECT maxCals,minCals FROM Goals WHERE goals_userid=" . $userid; 
+    	$goals_query = "SELECT * FROM Goals WHERE goals_userid=" . $userid; 
     	$g_query = $dbh->query($goals_query); 
     	$g_row = $g_query->fetch(); 
-    	if(!empty($g_row)){
-			echo "Your calorie goal is between " . $g_row[1] . " and " . $g_row[0] . " calories. <br/>"; 
-		}
-		else{
-			echo "You have not set a goal yet! Click <a href='#'>here</a> to set one. <br/>"; 
-		}
-    	//echo "Your calorie goal is between " . $g_row[7] . " and " . $g_row[2] . " calories. <br/>"; 
+    	echo "Your calorie goal is between " . $g_row[7] . " and " . $g_row[2] . " calories. <br/>"; 
         
         //calculate number of calories consumed on current day
     	$cal_query = "SELECT COALESCE(SUM(calories),0) FROM Ate, Food WHERE Food.foodid = Ate.foodid and eatDate='$date' and ate_userid=" . $userid;
     	$c_query = $dbh->query($cal_query);
     	$c_row = $c_query->fetch(); 
-        echo "You have consumed " . $c_row[0] ." calories today. <br/><br/>"; 
+        echo "You have consumed " . $c_row[0] ." calories today. <br/>"; 
         
         //Display foods that user has eaten
         $query = $dbh->query("SELECT * FROM Ate,Food WHERE Food.foodid = Ate.foodid and ate_userid=" . $userid . "ORDER BY eatDate DESC"); 
-		echo "You ate: <br/>"; 
-		/*
-		$row = $query->fetch(); 
-		if(empty($row)){
-			echo "Nothing so far today! <br/>";
-
-		}
-		*/
-    	while($row = $query->fetch()) {
-    		echo $row['name'] . " " . $row['calories'] . " cal on ". $row[3] . "<br/>";
-    	}
-
+    	echo "You ate: <br/>"; 
+        while($row = $query->fetch()) {
+        	echo $row['name'] . " " . $row['calories'] . " cal on ". $row[3] . "<br/>";
+        }
         echo "<br/>\n";
 
       } catch (PDOException $e) {
@@ -77,13 +63,11 @@
         die();
       }
     ?>
-    <button class="btn waves-effect waves-light" type="submit" name="action"><a href='all-restaurants.php' style='color:white'>Add Food!</a>
-      <i class="material-icons right">send</i>
-    </button>
-    <button class="btn waves-effect waves-light" type="submit" name="action"><a href='index.php' style='color:white'>Go Home</a>
+    <button class="btn waves-effect waves-light" type="submit" name="action">Add Food!
       <i class="material-icons right">send</i>
     </button>
     <br/>
+    Go <a href='index.php'>home</a>
   </div>
 
   <nav id='bottombar' />

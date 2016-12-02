@@ -1,10 +1,18 @@
 <?php
   session_start(); 
+  //$foods = $_SESSION['foods'];  
+       // $foods += array($myrow[0]=>$i); 
+        //echo "myrow[0]: " . $myrow[0] . " i=" . $i; 
+        //$_SESSION['foods'] = $foods; 
+
+  /*
   if (!isset($_POST['food'])) {
+  
     echo "You need to specify a food. Please <a href='all-restaurants.php'>try again</a>.";
     die();
   }
   $food = $_POST['food'];
+  */
 ?>
 
 <html>
@@ -25,7 +33,9 @@
   }
   try {
   
-  	$date = date('Y-m-d H:i:s'); 
+  	$date = (string) date('Y-m-d H:i:s'); 
+  	$date2 = (string) date('Y-m-d'); 
+ 
 	$firstname = $_SESSION['user_firstname']; 
 	$userid = $_SESSION['user_id']; 
 
@@ -42,11 +52,16 @@
 	}
     
     //insert new food into Ate table in database
-    $insert_query = "INSERT INTO Ate(ate_userid, studentNetID, foodID, eatDate) VALUES('" . $userid . "', 'jd282', '" . $food . "', '" . $date . "')";
-    $insert_result = $dbh->query($insert_query); 
+    foreach($_POST as $food_id => $quantity){ 
+    	//for loop because user can input multiple quantities of food
+    	for($i=0;$i<$quantity;$i++){
+    		$insert_query = "INSERT INTO Ate(ate_userid, studentNetID, foodID, eatDate) VALUES('" . $userid . "', 'jd282', '" . $food_id . "', '" . $date . "')";
+    		$insert_result = $dbh->query($insert_query); 
+    	}
+  	}
     
     //calculate number of calories consumed on current day
-	$cal_query = "SELECT COALESCE(SUM(calories),0) FROM Ate, Food WHERE Food.foodid = Ate.foodid and eatDate='$date' and ate_userid=" . $userid;
+	$cal_query = "SELECT COALESCE(SUM(calories),0) FROM Ate, Food WHERE Food.foodid = Ate.foodid and ate_userid=" . $userid;
 	$c_query = $dbh->query($cal_query);
 	$c_row = $c_query->fetch(); 
     echo "You have consumed " . $c_row[0] ." calories today. <br/>"; 

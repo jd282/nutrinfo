@@ -31,8 +31,8 @@ if (!isset($_POST['student'])) {
 </head>
 <body>
   <nav id='topbar'></nav>
-  <div id='container'>
-    <h1>All Restaurants on Campus</h1>
+  <div class='container'>
+    <h2>All Restaurants on Campus</h2>
 
     <?php
       try {
@@ -54,8 +54,8 @@ if (!isset($_POST['student'])) {
     <?php
           do {
             // echo produces output HTML:
-            echo "<input type='radio' name='restaurantid' value='" . $myrow[0] . "'required/>";
-            echo $myrow[2] . "<br/>";
+            echo "<input type='radio' name='restaurantid' value='" . $myrow[0] . "' id='" . $myrow[0] . "'required/>";
+            echo "<label for='" . $myrow[0] . "'>". $myrow[2] . "</label><br/>";
           } while ($myrow = $st->fetch());
           // Below we will see the use of a "short open tag" that is equivalent
           // to echoing the enclosed expression.

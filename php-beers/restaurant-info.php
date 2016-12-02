@@ -33,15 +33,23 @@ Select the food you ate below:<br/>
 <br />
 <?php
 	  session_start(); 
+	  $foods = array(); 
       do {
         // echo produces output HTML:
-        echo "<input type='radio' name='food' value='" . $myrow[0] . "'required/>";
+        $quantity = 10; //people can select quantity of 1-10 for each food 
+        echo "<select name='" . $myrow[0] . "' >";
+        for($i=0;$i<=$quantity;$i++){
+        	echo "<option value='" . $i . "'>" . $i . "</option>";
+        }
+        echo "</select>";
         echo $myrow[1] . "<br/>";
+
       } while ($myrow = $st->fetch());
       // Below we will see the use of a "short open tag" that is equivalent
       // to echoing the enclosed expression.
 ?>
 <?= $st->rowCount() ?> food(s) found in the database.<br/>
+
 <input type="submit" value="Add!"/>
 </form>
 <?php
