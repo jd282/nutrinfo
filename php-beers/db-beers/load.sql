@@ -1,4 +1,4 @@
-\COPY Users(user_id, user_email, user_password, user_firstname, user_lastname, user_registered) FROM 'data/Users.dat' WITH DELIMITER ',' NULL '' CSV
+\COPY Users(user_id, user_email, user_password, user_firstname, user_lastname, user_dob, user_registered) FROM 'data/Users.dat' WITH DELIMITER ',' NULL '' CSV
 \COPY Location(locationID, name) FROM 'data/Location.dat' WITH DELIMITER ',' NULL '' CSV
 \COPY Restaurant(restaurantID, locationID, name) FROM 'data/Restaurant.dat' WITH DELIMITER ',' NULL '' CSV
 \COPY timesOpen(restaurantID, locationID, timeOpen, timeClose, dayOfWeek) FROM 'data/timesOpen.dat' WITH DELIMITER ',' NULL '' CSV

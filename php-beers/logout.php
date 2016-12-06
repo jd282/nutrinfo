@@ -1,7 +1,8 @@
 <?php  
 	session_unset();
 	session_destroy();
-	header("Location: home.php");
+	header("Location: login.php");
+	exit; 
 	
 ?>
 

@@ -77,12 +77,14 @@
         die();
       }
     ?>
-    <button class="btn waves-effect waves-light" type="submit" name="action"><a href='all-restaurants.php' style='color:white'>Add Food!</a>
+    <a href='all-restaurants.php' style='color:white'>
+    <button class="btn waves-effect waves-light" type="submit" name="action">Add Food!
       <i class="material-icons right">send</i>
-    </button>
-    <button class="btn waves-effect waves-light" type="submit" name="action"><a href='index.php' style='color:white'>Go Home</a>
+    </button></a>
+    <a href='index.php' style='color:white'>
+    <button class="btn waves-effect waves-light" type="submit" name="action">Go Home
       <i class="material-icons right">send</i>
-    </button>
+    </button></a>
     <br/>
   </div>
 
