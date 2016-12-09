@@ -42,36 +42,34 @@
                 echo "<li>";
                 	echo "<div class = 'collapsible-header'>" . $myrow['name'] . "</div>"; 
                 	echo "<div class = 'collapsible-body'>";
+                  echo "<ul class='collapsible' data-collapsible='accordian'>"
                 $r_id = $myrow[0]; 
                 //print $r_id; 
                 $foods_q = $dbh->query('SELECT Food.name, Food.foodID FROM Serves, Food WHERE Serves.restaurantID=' . $r_id . ' AND Food.foodID=Serves.foodID'); 
                 if(($food = $foods_q->fetch())){
-                	do{
-                		echo "<a class='waves-effect waves-light btn' href=# " . $food[1] . "> ". $food['name'] . " </a>"; 
+                	do{ 
                 		//echo $food['name'] . "<br/>";
-                		echo "<div id='" . $food[1] . "' class='modal'>"; 
-                			echo "<div class='modal-content'>";
-                				echo "<h4>" . $food['name'] . "</h4>";
-                				echo "<table>
-                					<tr>
-                						<th> name </th>
-                						<th> value </th>
-                					</tr>
-                					<tr>
-                						<td>calories</td>
-                						<td>100</td>
-                						
-                					</tr>
-                					</table>
-                				</div>
-                				<div>
-                					<a href='#!' class='modal-action modal-close waves-effect waves-green btn-flat'>close</a>
-                				</div>
-                			</div>
-                					";
+                		echo "
+                      <li>
+                        <div class='collapsible-header'>" .$food['name'] . "</div>
+                        <div class='collapsible-body'>";
+                  				echo "<table>
+                  					<tr>
+                  						<th> name </th>
+                  						<th> value </th>
+                  					</tr>
+                  					<tr>
+                  						<td>calories</td>
+                  						<td>100</td>
+                  						
+                  					</tr>
+                  					</table>";
+                      echo "</div>
+                        </li>"
 
                 	}while($food = $foods_q->fetch()); 		
                 } 
+                echo "</ul>"
                 echo "</div>"; 
                 echo "</li>"; 
                 //echo "<br/>";
