@@ -47,9 +47,9 @@
                 $foods_q = $dbh->query('SELECT Food.name, Food.foodID FROM Serves, Food WHERE Serves.restaurantID=' . $r_id . ' AND Food.foodID=Serves.foodID'); 
                 if(($food = $foods_q->fetch())){
                 	do{
-                		echo "<a class='waves-effect waves-light btn' href=#" . $food[1] . "> ". $food['name'] . " </a>"; 
+                		echo "<a class='waves-effect waves-light btn' href=# " . $food[1] . "> ". $food['name'] . " </a>"; 
                 		//echo $food['name'] . "<br/>";
-                		echo "<div id='" . $food[1] . "' class='modal'>";
+                		echo "<div id='" . $food[1] . "' class='modal'>"; 
                 			echo "<div class='modal-content'>";
                 				echo "<h4>" . $food['name'] . "</h4>";
                 				echo "<table>
