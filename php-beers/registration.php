@@ -81,8 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </header>    
     
         <section id="content">
-        	<form id='register' method='post' accept-charset='UTF-8'>
-    			<fieldset>
+        	<form class='col s12' id='register' method='post' accept-charset='UTF-8'>
+    			<!-- <fieldset>
     				<input type='hidden' name='submitted' id='submitted' value='1'/>
     				<label for='name' >First Name: </label>
     				<input type='text' name='firstname' id='firstname' maxlength="50" required/>
@@ -98,7 +98,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     				<br />
     				<label for='dob' >DOB:</label>
     				<input type='text' name='dob' id='dob' maxlength="50" required/>
-    			</fieldset>
+    			</fieldset> -->
+
+                <div class='row'>
+                    <div class='input-field col s6'>
+                        <input placeholder='First Name' name='firstname' id='firstname' type='text' maxlength='50' required/>
+                        <label for='firstname'> First Name </label>
+                    </div>
+                    <div class='input-field col s6'>
+                        <input placeholder='Last Name' name='lastname' id='lastname' type='text' maxlength='50' required/>
+                        <label for='lastname'>  Last Name </label>
+                    </div>
+                </div>
+
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <input id='dob' name='dob' type='date' class='datepicker' required/>
+                    </div>
+                </div>
+
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <input placeholder='E-Mail' name='email' id='email' maxlength='50' type='text' required/>
+                        <label for='email'> E-Mail Address </label>
+                    </div>
+                </div>
+
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <input placeholder='Password' name='password' id='password' type='password' maxlength='50' required/>
+                        <label for='password' data-error='Please Input a Valid Email'> Password </label>
+                    </div>
+                </div>
+
     			<br/>
     			<input type='submit' name='Submit' value='Submit' />
     		</form>
