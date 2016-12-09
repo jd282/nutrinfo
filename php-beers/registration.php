@@ -79,15 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         		<h1>Registration</h1>
         	</hgroup>
         </header>    
-        <?php 
-        	//if ($_SESSION['error'] == true) {
-        	if($error == true){
-        		//print $_SESSION['error']; 
-        		echo "<h3 style='color:red'>THIS EMAIL IS ALREADY REGISTERED!</h3>"; 
-        		$error = false; 
-        		//$_SESSION['error'] = false; 
-        	}
-        ?>
+    
         <section id="content">
         	<form id='register' method='post' accept-charset='UTF-8'>
     			<fieldset>

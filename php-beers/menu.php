@@ -22,6 +22,8 @@
   <nav id='topbar'></nav>
 
   <div class='container'>
+  
+  	<h2>Menus</h2>
 
     <ul class="collapsible" data-collapsible="accordion">
 
@@ -40,9 +42,9 @@
               do {
                 //print $myrow['name'];
                 echo "<li>";
-                	echo "<div class = 'collapsible-header'>" . $myrow['name'] . "</div>"; 
-                	echo "<div class = 'collapsible-body'>";
-                  echo "<ul class='collapsible' data-collapsible='accordian'>"
+                	echo "<div class = 'collapsible-header' style='background-color:orange'>" . $myrow['name'] . "</div>"; 
+                	echo "<div class = 'collapsible-body' align='center'>";
+                  echo "<ul class='collapsible' data-collapsible='accordian' style='width:85%;'>";
                 $r_id = $myrow[0]; 
                 //print $r_id; 
                 $foods_q = $dbh->query('SELECT Food.name, Food.foodID FROM Serves, Food WHERE Serves.restaurantID=' . $r_id . ' AND Food.foodID=Serves.foodID'); 
@@ -51,7 +53,7 @@
                 		//echo $food['name'] . "<br/>";
                 		echo "
                       <li>
-                        <div class='collapsible-header'>" .$food['name'] . "</div>
+                        <div class='collapsible-header' style='background-color:lightgreen'>" .$food['name'] . "</div>
                         <div class='collapsible-body'>";
                   				echo "<table>
                   					<tr>
@@ -65,11 +67,11 @@
                   					</tr>
                   					</table>";
                       echo "</div>
-                        </li>"
+                        </li>";
 
                 	}while($food = $foods_q->fetch()); 		
                 } 
-                echo "</ul>"
+                echo "</ul>";
                 echo "</div>"; 
                 echo "</li>"; 
                 //echo "<br/>";

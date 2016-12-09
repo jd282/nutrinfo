@@ -15,9 +15,22 @@
   */
 ?>
 
-<html>
-<head><title>Nutrinfo</title></head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Student Information</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="./materialize/css/icon" rel="stylesheet">
+    <link href="./materialize/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="./materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <style>img.chromoji { width:1em !important; height:1em !important; }.chromoji-font, #chromoji-font { font-size:1em !important; }</style>
+</head>
 <body>
+	<nav id='topbar'></nav>
+	<div class='container'>
 
 <h1>Your Information: </h1>
 <?php
@@ -68,10 +81,25 @@
     
     //Display foods that user has eaten
     $query = $dbh->query("SELECT * FROM Ate,Food WHERE Food.foodid = Ate.foodid and ate_userid=" . $userid . "ORDER BY eatDate DESC"); 
-	echo "You ate: <br/>"; 
+	echo "<br/>You ate: <br/>"; 
+	echo "<table>
+	<tr style='border: 1px solid black;'>
+		<th>Food</th>
+		<th>Calories</th>
+		<th>Time</th>
+	</tr>";
     while($row = $query->fetch()) {
-    	echo $row['name'] . " " . $row['calories'] . " cal on ". $row[3] . "<br/>";
+    	//echo $row['name'] . " " . $row['calories'] . " cal on ". $row[3] . "<br/>";
+    	echo "
+    	<tr style='border: 1px solid black;'>
+    		<td>" . $row['name'] . "</td>
+    		<td>" . $row['calories'] . "</td>
+    		<td>" . $row[3] . "</td>
+    	</tr>
+    	";
     }
+    
+    echo "</table>";
 
     echo "<br/>\n";
 
@@ -87,5 +115,11 @@
 <br/>
 Go <a href='index.php'>home</a>
 
+</div>
+	<script src="loggedInBars.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="./materialize/js/materialize.js"></script>
+    <script src="./materialize/js/materialize.min.js"></script>
+    <script src="./materialize/js/init.js"></script>
 </body>
 </html>
