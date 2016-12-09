@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         	</hgroup>
         </header>    
     
-        <section id="content">
+        <div class='row'>
         	<form class='col s12' id='register' method='post' accept-charset='UTF-8'>
     			<!-- <fieldset>
     				<input type='hidden' name='submitted' id='submitted' value='1'/>
@@ -113,28 +113,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <div class='row'>
                     <div class='input-field col s12'>
-                        <input id='dob' name='dob' type='date' class='datepicker' required/>
+                        <input placeholder='MM/DD/YYYY' id='dob' name='dob' type='date' class='datepicker' required/>
+                        <!-- <label for='dob'>Date of Birth (MM/DD/YYYY)</label> -->
                     </div>
                 </div>
 
                 <div class='row'>
                     <div class='input-field col s12'>
-                        <input placeholder='E-Mail' name='email' id='email' maxlength='50' type='text' required/>
-                        <label for='email'> E-Mail Address </label>
+                        <input placeholder='E-Mail' name='email' id='email' maxlength='50' type='email' class='validate' required/>
+                        <label for='email' data-error='Please Input a Valid Email'> E-Mail Address </label>
                     </div>
                 </div>
 
                 <div class='row'>
                     <div class='input-field col s12'>
                         <input placeholder='Password' name='password' id='password' type='password' maxlength='50' required/>
-                        <label for='password' data-error='Please Input a Valid Email'> Password </label>
+                        <label for='password'> Password </label>
                     </div>
                 </div>
 
     			<br/>
     			<input type='submit' name='Submit' value='Submit' />
     		</form>
-        </section>
+        </div>
         <!-- [/content] -->
         
     </div>
