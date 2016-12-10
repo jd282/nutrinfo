@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
 
                 <div class='row'>
-                    <div class='input-field col s12'>
+                    <div class='input-field col s6'>
                         <input placeholder='MM/DD/YYYY' id='dob' name='dob' type='date' class='datepicker' required/>
                         <!-- <label for='dob'>Date of Birth (MM/DD/YYYY)</label> -->
                     </div>
