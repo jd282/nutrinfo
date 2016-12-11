@@ -4,7 +4,6 @@ $lastname = null;
 $email = null; 
 $password = null;
 $dob = null; 
-$error; 
 
 session_start(); 
 $_SESSION['error'] = false; 
@@ -26,8 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $dob = $_POST["dob"]; 
         $date = date('Y-m-d'); 
         
-        //$_SESSION['error'] = false; 
-    	$error = $_POST['error']; 
     	
     	$dbconn = pg_connect("host=localhost dbname=nutrinfo user=vagrant password=dbpasswd")
     		or die('Could not connect: ' . pg_last_error());
@@ -39,8 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     	$myrow = pg_fetch_assoc($check_result);
     	
     	if(!empty($myrow) || is_null($myrow)){
-    		//$_SESSION['error'] = true; 
-    		$error = true; 
      		header('Location: registration_error.php');
     		exit(); 
     	}
@@ -112,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
 
                 <div class='row'>
-                    <div class='input-field col s6'>
+                    <div class='input-field col s2'>
                         <input placeholder='MM/DD/YYYY' id='dob' name='dob' type='date' class='datepicker' required/>
                         <!-- <label for='dob'>Date of Birth (MM/DD/YYYY)</label> -->
                     </div>

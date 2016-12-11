@@ -35,6 +35,7 @@
       try {
       
       	$date = date('Y-m-d'); 
+      	
     	$firstname = $_SESSION['user_firstname']; 
     	$userid = $_SESSION['user_id']; 
     	
@@ -51,21 +52,21 @@
     	//echo "Your calorie goal is between " . $g_row[7] . " and " . $g_row[2] . " calories. <br/>"; 
         
         //calculate number of calories consumed on current day
-    	$cal_query = "SELECT COALESCE(SUM(calories),0) FROM Ate, Food WHERE Food.foodid = Ate.foodid and eatDate='$date' and ate_userid=" . $userid;
+    	$cal_query = "SELECT COALESCE(SUM(calories),0) FROM Ate, Food WHERE Food.foodid = Ate.foodid and Ate.eatDate >= '$date' and ate_userid=" . $userid;
     	$c_query = $dbh->query($cal_query);
     	$c_row = $c_query->fetch(); 
         echo "You have consumed " . $c_row[0] ." calories today. <br/><br/>"; 
         
         //Display foods that user has eaten
-        $query = $dbh->query("SELECT * FROM Ate,Food WHERE Food.foodid = Ate.foodid and ate_userid=" . $userid . "ORDER BY eatDate DESC"); 
+        $query = $dbh->query("SELECT * FROM Ate,Food WHERE Food.foodid = Ate.foodid and Ate.eatDate >= '$date' and ate_userid=" . $userid . "ORDER BY eatDate DESC"); 
 		echo "You ate: <br/>"; 
-		/*
-		$row = $query->fetch(); 
+		
+		
 		if(empty($row)){
 			echo "Nothing so far today! <br/>";
 
 		}
-		*/
+		
     	while($row = $query->fetch()) {
     		echo $row['name'] . " " . $row['calories'] . " cal on ". $row[3] . "<br/>";
     	}
@@ -77,6 +78,10 @@
         die();
       }
     ?>
+    <a href='edit_profile.php' style='color:white'>
+    <button class="btn waves-effect waves-light" type="submit" name="action">Edit Profile
+      <i class="material-icons right">send</i>
+    </button></a>
     <a href='all-restaurants.php' style='color:white'>
     <button class="btn waves-effect waves-light" type="submit" name="action">Add Food!
       <i class="material-icons right">send</i>

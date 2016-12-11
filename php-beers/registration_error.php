@@ -4,7 +4,6 @@ $lastname = null;
 $email = null; 
 $password = null;
 $dob = null; 
-$error; 
 
 session_start(); 
 $_SESSION['error'] = false; 
@@ -26,8 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $dob = $_POST["dob"]; 
         $date = date('Y-m-d'); 
         
-        //$_SESSION['error'] = false; 
-    	$error = $_POST['error']; 
     	
     	$dbconn = pg_connect("host=localhost dbname=nutrinfo user=vagrant password=dbpasswd")
     		or die('Could not connect: ' . pg_last_error());
@@ -38,9 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     	$check_result = pg_execute($dbconn, "my_q", array($email));
     	$myrow = pg_fetch_assoc($check_result);
     	
-    	if(!empty($myrow) || is_null($myrow)){
-    		//$_SESSION['error'] = true; 
-    		$error = true; 
+    	if(!empty($myrow) || is_null($myrow)){ 
      		header('Location: registration_error.php');
     		exit(); 
     	}
@@ -78,20 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         	<hgroup>
         		<h1>Registration</h1>
         	</hgroup>
-        </header>  
-        <h3> This email already exists!!</h3>  
-        <?php 
-        	//if ($_SESSION['error'] == true) {
-        	if($error == true){
-        		//print $_SESSION['error']; 
-        		echo "<h3 style='color:red'>THIS EMAIL IS ALREADY REGISTERED!</h3>"; 
-        		$error = false; 
-        		//$_SESSION['error'] = false; 
-        	}
-        ?>
-        <section id="content">
-        	<form id='register' method='post' accept-charset='UTF-8'>
-    			<fieldset>
+        </header>    
+    	<h3> This email is already taken!</h3>
+        <div class='row'>
+        	<form class='col s12' id='register' method='post' accept-charset='UTF-8'>
+    			<!-- <fieldset>
     				<input type='hidden' name='submitted' id='submitted' value='1'/>
     				<label for='name' >First Name: </label>
     				<input type='text' name='firstname' id='firstname' maxlength="50" required/>
@@ -107,11 +93,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     				<br />
     				<label for='dob' >DOB:</label>
     				<input type='text' name='dob' id='dob' maxlength="50" required/>
-    			</fieldset>
+    			</fieldset> -->
+
+                <div class='row'>
+                    <div class='input-field col s6'>
+                        <input placeholder='First Name' name='firstname' id='firstname' type='text' maxlength='50' required/>
+                        <label for='firstname'> First Name </label>
+                    </div>
+                    <div class='input-field col s6'>
+                        <input placeholder='Last Name' name='lastname' id='lastname' type='text' maxlength='50' required/>
+                        <label for='lastname'>  Last Name </label>
+                    </div>
+                </div>
+
+                <div class='row'>
+                    <div class='input-field col s2'>
+                        <input placeholder='MM/DD/YYYY' id='dob' name='dob' type='date' class='datepicker' required/>
+                        <!-- <label for='dob'>Date of Birth (MM/DD/YYYY)</label> -->
+                    </div>
+                </div>
+
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <input placeholder='E-Mail' name='email' id='email' maxlength='50' type='email' class='validate' required/>
+                        <label for='email' data-error='Please Input a Valid Email'> E-Mail Address </label>
+                    </div>
+                </div>
+
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <input placeholder='Password' name='password' id='password' type='password' maxlength='50' required/>
+                        <label for='password'> Password </label>
+                    </div>
+                </div>
+
     			<br/>
     			<input type='submit' name='Submit' value='Submit' />
     		</form>
-        </section>
+        </div>
         <!-- [/content] -->
         
     </div>

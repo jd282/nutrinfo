@@ -45,8 +45,7 @@ Select the food you ate below:<br/>
         echo $myrow[1] . "<br/>";
 
       } while ($myrow = $st->fetch());
-      // Below we will see the use of a "short open tag" that is equivalent
-      // to echoing the enclosed expression.
+
 ?>
 <?= $st->rowCount() ?> food(s) found in the database.<br/>
 

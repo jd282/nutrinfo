@@ -74,13 +74,13 @@
   	}
     
     //calculate number of calories consumed on current day
-	$cal_query = "SELECT COALESCE(SUM(calories),0) FROM Ate, Food WHERE Food.foodid = Ate.foodid and ate_userid=" . $userid;
+	$cal_query = "SELECT COALESCE(SUM(calories),0) FROM Ate, Food WHERE Food.foodid = Ate.foodid and Ate.eatDate >= '$date2' and ate_userid=" . $userid;
 	$c_query = $dbh->query($cal_query);
 	$c_row = $c_query->fetch(); 
     echo "You have consumed " . $c_row[0] ." calories today. <br/>"; 
     
-    //Display foods that user has eaten
-    $query = $dbh->query("SELECT * FROM Ate,Food WHERE Food.foodid = Ate.foodid and ate_userid=" . $userid . "ORDER BY eatDate DESC"); 
+    //Display foods that user has eaten that day
+    $query = $dbh->query("SELECT * FROM Ate,Food WHERE Food.foodid = Ate.foodid and Ate.eatDate >= '$date2' and ate_userid=" . $userid . "ORDER BY eatDate DESC"); 
 	echo "<br/>You ate: <br/>"; 
 	echo "<table>
 	<tr style='border: 1px solid black;'>
@@ -111,9 +111,19 @@
   or <a href='edit-drinker.php?drinker=<?= $drinker ?>'>edit</a> the information.
   */
 ?>
-<a href='all-restaurants.php'>Add more food!</a>
-<br/>
-Go <a href='index.php'>home</a>
+    <a href='edit_profile.php' style='color:white'>
+    <button class="btn waves-effect waves-light" type="submit" name="action">Edit Profile
+      <i class="material-icons right">send</i>
+    </button></a>
+    <a href='all-restaurants.php' style='color:white'>
+    <button class="btn waves-effect waves-light" type="submit" name="action">Add Food!
+      <i class="material-icons right">send</i>
+    </button></a>
+    <a href='index.php' style='color:white'>
+    <button class="btn waves-effect waves-light" type="submit" name="action">Go Home
+      <i class="material-icons right">send</i>
+    </button></a>
+    <br/>
 
 </div>
 	<script src="loggedInBars.js"></script>

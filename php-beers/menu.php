@@ -47,7 +47,7 @@
                   echo "<ul class='collapsible' data-collapsible='accordian' style='width:85%;'>";
                 $r_id = $myrow[0]; 
                 //print $r_id; 
-                $foods_q = $dbh->query('SELECT Food.name, Food.foodID FROM Serves, Food WHERE Serves.restaurantID=' . $r_id . ' AND Food.foodID=Serves.foodID'); 
+                $foods_q = $dbh->query('SELECT Food.name, Food.foodID, Food.calories FROM Serves, Food WHERE Serves.restaurantID=' . $r_id . ' AND Food.foodID=Serves.foodID'); 
                 if(($food = $foods_q->fetch())){
                 	do{ 
                 		//echo $food['name'] . "<br/>";
@@ -57,12 +57,12 @@
                         <div class='collapsible-body'>";
                   				echo "<table>
                   					<tr>
-                  						<th> name </th>
-                  						<th> value </th>
+                  						<th> Name </th>
+                  						<th> Value </th>
                   					</tr>
                   					<tr>
-                  						<td>calories</td>
-                  						<td>100</td>
+                  						<td>Calories</td>
+                  						<td>" . $food['calories'] . "</td>
                   						
                   					</tr>
                   					</table>";
