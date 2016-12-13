@@ -133,12 +133,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 
                 <div class='row'>
-                    <div class='input-field col s12'>
+                    <!-- <div class='input-field col s12'>
                         <input placeholder='Sex' name='sex' id='sex' type='text' maxlength='50' required/>
                         <label for='sex'> Sex </label>
-                    </div>
+                    </div> -->
+                    <label>Sex</label>
+                    <select class='browser-default'>
+                        <option value='' disabeled selected>Please Choose Your Sex</option>
+                        <option value='M'>Male</option>
+                        <option value='F'>Female</option>
+                    </select>
                 </div>
-                <div class='row'>
+                <!-- <div class='row'>
                     <div class='input-field col s12'>
                         <input placeholder='Height' name='height' id='height' type='text' maxlength='50' required/>
                         <label for='height'> Height </label>
@@ -149,6 +155,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class='input-field col s12'>
                         <input placeholder='Weight' name='weight' id='weight' type='text' maxlength='50' required/>
                         <label for='weight'> Weight </label>
+                    </div>
+                </div> -->
+
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <p> Please slide to your height (in inches) </p>
+                        <p class="range-field">
+                            <input type="range" id="height" min="0" max="96" />
+                        </p>
+                    </div>
+                </div>
+
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <p> Please slide to your weight (in pounds) </p>
+                        <p class="range-field">
+                            <input type="range" id="weight" min="12" max="96" />
+                        </p>
                     </div>
                 </div>
 
