@@ -68,7 +68,7 @@ PRIMARY KEY(restaurantID, locationID, foodID)
 CREATE TABLE Ate
 (
 ate_userid INTEGER NOT NULL REFERENCES Users(user_id),
-foodID INTEGER NOT NULL REFERENCES Food(FoodID),
+foodID INTEGER NOT NULL REFERENCES Food(foodID),
 eatDate TIMESTAMP(20) NOT NULL
 );
 
