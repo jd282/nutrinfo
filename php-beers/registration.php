@@ -162,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class='input-field col s12'>
                         <p> Please slide to your height (in inches) </p>
                         <p class="range-field">
-                            <input type="range" name='height' id="height" min="0" max="96" value='-1' required />
+                            <input type="range" name='height' id="height" min="0" max="96" value='64' required />
                         </p>
                     </div>
                 </div>
@@ -171,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class='input-field col s12'>
                         <p> Please slide to your weight (in pounds) </p>
                         <p class="range-field">
-                            <input type="range" name='weight' id="weight" min="12" max="96" value='' required />
+                            <input type="range" name='weight' id="weight" min="50" max="500" value='150' required />
                         </p>
                     </div>
                 </div>

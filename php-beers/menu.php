@@ -46,8 +46,9 @@
                 	echo "<div class = 'collapsible-body' align='center'>";
                   echo "<ul class='collapsible' data-collapsible='accordian' style='width:85%;'>";
                 $r_id = $myrow[0]; 
-                //print $r_id; 
-                $foods_q = $dbh->query('SELECT Food.name, Food.foodID, Food.calories FROM Serves, Food WHERE Serves.restaurantID=' . $r_id . ' AND Food.foodID=Serves.foodID'); 
+                //print $r_id;
+                //Food(foodID, name, calories, totalFat, transFat, saturatedFat, cholesterol, sodium, carbs, fiber, sugars, protein, vitaminA, vitaminC, vitaminD, calcium, iron)
+                $foods_q = $dbh->query('SELECT Food.name, Food.foodID, Food.calories, Food.totalFat, Food.transFat, Food.saturatedFat, Food.cholesterol, Food.sodium, Food.carbs, Food.fiber, Food.sugars, Food.protein, Food.vitaminA, Food.vitaminC, Food.vitaminD, Food.calcium, Food.iron FROM Serves, Food WHERE Serves.restaurantID=' . $r_id . ' AND Food.foodID=Serves.foodID'); 
                 if(($food = $foods_q->fetch())){
                 	do{ 
                 		//echo $food['name'] . "<br/>";
@@ -55,16 +56,76 @@
                       <li>
                         <div class='collapsible-header' style='background-color:lightgreen'>" .$food['name'] . "</div>
                         <div class='collapsible-body'>";
-                  				echo "<table>
-                  					<tr>
-                  						<th> Name </th>
-                  						<th> Value </th>
-                  					</tr>
-                  					<tr>
-                  						<td>Calories</td>
-                  						<td>" . $food['calories'] . "</td>
+                  				echo "<table class='striped'>
+                  					<thead>
+                  						<tr>
+                  							<th> Name </th>
+                  							<th> Value </th>
+                  						</tr>
+                  					</thead>
+                  					<tbody>
+                  						<tr>
+                  							<td><b>Calories</b></td>
+                  							<td>" . $food['calories'] . "</td>
+                  						</tr>
                   						
-                  					</tr>
+                  						<tr>
+                  							<td><b>Total Fat</b></td>
+                  							<td>" . $food['totalfat'] . "g</td>
+                  						</tr>
+                  						<tr>
+                  							<td>Trans Fat</td>
+                  							<td>" . $food['transfat'] . "g</td>
+                  						</tr>
+                  						<tr>
+                  							<td>Saturated Fat</td>
+                  							<td>" . $food['saturatedfat'] . "g</td>
+                  						</tr>
+                  						<tr>
+                  							<td>Cholesterol</td>
+                  							<td>" . $food['cholesterol'] . "mg</td>
+                  						</tr>
+                  						<tr>
+                  							<td>Sodium</td>
+                  							<td>" . $food['sodium'] . "mg</td>
+                  						</tr>
+                  						<tr>
+                  							<td><b>Carbohydrates</b></td>
+                  							<td>" . $food['carbs'] . "g</td>
+                  						</tr>
+                  						<tr>
+                  							<td>Fiber</td>
+                  							<td>" . $food['fiber'] . "g</td>
+                  						</tr>
+                  						<tr>
+                  							<td>Sugars</td>
+                  							<td>" . $food['sugars'] . "g</td>
+                  						</tr>
+                  						<tr>
+                  							<td><b>Protein</b></td>
+                  							<td>" . $food['protein'] . "g</td>
+                  						</tr>
+                  						<tr>
+                  							<td>Vitamin A</td>
+                  							<td>" . $food['vitamina'] . "%</td>
+                  						</tr>
+                  						<tr>
+                  							<td>Vitamin C</td>
+                  							<td>" . $food['vitaminc'] . "%</td>
+                  						</tr>
+                  						<tr>
+                  							<td>Vitamin D</td>
+                  							<td>" . $food['vitamind'] . "%</td>
+                  						</tr>
+                  						<tr>
+                  							<td>Calcium</td>
+                  							<td>" . $food['calcium'] . "%</td>
+                  						</tr>
+                  						<tr>
+                  							<td>Iron</td>
+                  							<td>" . $food['iron'] . "%</td>
+                  						</tr>
+                  					</tbody>
                   					</table>";
                       echo "</div>
                         </li>";

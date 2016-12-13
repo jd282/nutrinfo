@@ -1,6 +1,6 @@
 document.getElementById('topbar').innerHTML =
 	"<nav class='light-blue lighten-1' role='navigation'>" +
-	    "<div class='nav-wrapper container'><a id='logo-container' href='#' class='brand-logo'>Nutrinfo</a>" +
+	    "<div class='nav-wrapper container'><a id='logo-container' href='#' class='brand-logo'>Cameron Hungries</a>" +
 	      "<ul class='right hide-on-med-and-down'>"+
 	      "<li><a href='login.php'>Log In</a></li>" +
 	        "<li><a href='#'>Menus</a></li>" +
