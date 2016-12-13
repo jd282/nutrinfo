@@ -4,6 +4,8 @@
 	$default_firstname = null;
 	$default_lastname = null;  
 	$default_email = null;  
+	$default_height = null; 
+	$default_weight = null; 
 	
 	$default_minCals = null; 
 	$default_maxCals = null; 
@@ -32,6 +34,8 @@
   		$firstname = $_POST["firstname"];
   		$lastname = $_POST["lastname"];
   		$email = $_POST["email"];
+  		$height = $POST["height"]; 
+  		$weight = $POST["weight"];
 		$minCals = $_POST["minCals"];
     	$maxCals = $_POST["maxCals"];
     	$minFat = $_POST["minFat"];
@@ -49,6 +53,7 @@
     	$update_result->execute(array($email, $firstname, $lastname, $userid));
     	
     	//Check if user already has existing goals in goals table 
+    	$goals_query = "SELECT * FROM Goals Where goals_userid=" . $userid;
     	$g_query = $dbh->query($goals_query); 
 		$g_row = $g_query->fetch(); 
 		if(!empty($g_row)){
@@ -80,6 +85,8 @@
 	$default_firstname = $user_info['user_firstname'];
 	$default_lastname = $user_info['user_lastname'];  
 	$default_email = $user_info['user_email'];  
+	$default_height = $user_info['user_height'];
+	$default_weight = $user_info['user_weight']; 
 	
 	
 	$query = "SELECT minCals,maxCals, minFat, maxFat, minSug, maxSug, minSodium, maxSodium, minProtein, maxProtein FROM Goals WHERE goals_userid=" . $userid; 
@@ -126,6 +133,12 @@
     				<br />
     				<label for='email' >Email Address:</label>
     				<input type='text' name='email' id='email' maxlength="50" value='<?php echo $default_email; ?>'/>
+     				<br />
+     				<label for='email' >Height:</label>
+    				<input type='text' name='height' id='height' maxlength="50" value='<?php echo $default_height; ?>'/>
+     				<br />
+     				<label for='email' >Weight:</label>
+    				<input type='text' name='weight' id='weight' maxlength="50" value='<?php echo $default_weight; ?>'/>
      				<br />
      				<h3>Goals </h3>
     				<label for='minCals' >Minimum Calories:</label>
