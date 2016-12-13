@@ -59,7 +59,7 @@
             echo "<label>";
             echo $myrow[1];
             echo "</label";
-            echo "<select class='browser-defualt' name='" . $myrow[0] . "' >";
+            echo "<select class='browser-default' name='" . $myrow[0] . "' >";
             for($i=0;$i<=$quantity;$i++){
             	echo "<option value='" . $i . "'>" . $i . "</option>";
             }
