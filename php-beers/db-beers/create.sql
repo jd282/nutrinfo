@@ -31,7 +31,7 @@ restaurantID INTEGER NOT NULL REFERENCES Restaurant(restaurantID),
 locationID INTEGER NOT NULL REFERENCES Location(locationID),
 timeOpen TIME, 
 timeClose TIME CHECK((timeOpen IS NULL AND timeClose IS NULL) OR (timeOpen IS NOT NULL AND timeClose IS NOT NULL)),
-dayOfWeek VARCHAR(10), 
+dayOfWeek VARCHAR(10) NOT NULL, 
 PRIMARY KEY(restaurantID, locationID)
 );
 
