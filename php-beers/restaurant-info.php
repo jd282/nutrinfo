@@ -1,22 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0065)http://materializecss.com/templates/starter-template/preview.html -->
-<html lang='en'>
-<head>
-  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
-  
-  <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1.0'>
-  <title>All Foods at  <?= $myrow['name'] ?></title>
-
-  <link href='./Media/dukedining.png' rel='icon'>
-
-  <!-- CSS  -->
-  <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
-  <link href='./materialize/css/icon' rel='stylesheet'>
-  <link href='./materialize/css/materialize.min.css' type='text/css' rel='stylesheet' media='screen,projection'>
-  <link href='./materialize/css/materialize.css' type='text/css' rel='stylesheet' media='screen,projection'>
-  <style>img.chromoji { width:1em !important; height:1em !important; }.chromoji-font, #chromoji-font { font-size:1em !important; }</style>
-</head>
-
 <?php
   if (!isset($_POST['restaurantid'])) {
     echo "You need to specify a restaurant. Please <a href='all-restaurants.php'>try again</a>.";
@@ -41,6 +22,25 @@
     $st = $dbh->query("SELECT * FROM Food, Serves,Restaurant WHERE Serves.restaurantID='$restaurantid' and Serves.foodID=Food.foodID and Restaurant.restaurantID=Serves.restaurantID");
     if (($myrow = $st->fetch())) {
 ?>
+
+<!DOCTYPE html>
+<!-- saved from url=(0065)http://materializecss.com/templates/starter-template/preview.html -->
+<html lang='en'>
+<head>
+  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+  
+  <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1.0'>
+  <title>All Foods at  <?= $myrow['name'] ?></title>
+
+  <link href='./Media/dukedining.png' rel='icon'>
+
+  <!-- CSS  -->
+  <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
+  <link href='./materialize/css/icon' rel='stylesheet'>
+  <link href='./materialize/css/materialize.min.css' type='text/css' rel='stylesheet' media='screen,projection'>
+  <link href='./materialize/css/materialize.css' type='text/css' rel='stylesheet' media='screen,projection'>
+  <style>img.chromoji { width:1em !important; height:1em !important; }.chromoji-font, #chromoji-font { font-size:1em !important; }</style>
+</head>
 
 <body>
   <nav id='topbar'></nav>
