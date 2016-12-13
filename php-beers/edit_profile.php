@@ -111,6 +111,25 @@
 
 ?>
 
+<!DOCTYPE html>
+<!-- saved from url=(0065)http://materializecss.com/templates/starter-template/preview.html -->
+<html lang='en'>
+<head>
+  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+  
+  <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1.0'>
+  <title>Edit Profile</title>
+
+  <link href='./Media/dukedining.png' rel='icon'>
+
+  <!-- CSS  -->
+  <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
+  <link href='./materialize/css/icon' rel='stylesheet'>
+  <link href='./materialize/css/materialize.min.css' type='text/css' rel='stylesheet' media='screen,projection'>
+  <link href='./materialize/css/materialize.css' type='text/css' rel='stylesheet' media='screen,projection'>
+  <style>img.chromoji { width:1em !important; height:1em !important; }.chromoji-font, #chromoji-font { font-size:1em !important; }</style>
+</head>
+
 <body>
     <nav id='topbar'></nav>
     <div class='container'>
@@ -120,66 +139,141 @@
         		<h1>Edit Profile</h1>
         	</hgroup>
         </header>    
-        <section id="content">
-        	<form id='register' method='post' accept-charset='UTF-8' action='edit_profile.php'>
-    			<fieldset>
+        <div class="row">
+        	<form class='col s12' id='register' method='post' accept-charset='UTF-8' action='edit_profile.php'>
+    			
     				<input type='hidden' name='submitted' id='submitted' value='1'/>
+
     				<h3>Personal Information</h3>
-    				<label for='name' >First Name: </label>
-    				<input type='text' name='firstname' id='firstname' maxlength="50" value='<?php echo $default_firstname; ?>' />
-    				<br />
-    				<label for='name' >Last Name: </label>
-    				<input type='text' name='lastname' id='lastname' maxlength="50" value='<?php echo $default_lastname; ?>' />
-    				<br />
-    				<label for='email' >Email Address:</label>
-    				<input type='text' name='email' id='email' maxlength="50" value='<?php echo $default_email; ?>'/>
-     				<br />
-     				<label for='email' >Height:</label>
-    				<input type='text' name='height' id='height' maxlength="50" value='<?php echo $default_height; ?>'/>
-     				<br />
-     				<label for='email' >Weight:</label>
+            <div class='row'>
+              <div class='input-field col s6'>
+        				<label for='name' >First Name: </label>
+        				<input type='text' name='firstname' id='firstname' maxlength="50" value='<?php echo $default_firstname; ?>' />
+              </div>
+
+              <div class='input-field col s6'>
+        				<label for='name' >Last Name: </label>
+        				<input type='text' name='lastname' id='lastname' maxlength="50" value='<?php echo $default_lastname; ?>' />
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s6'>
+        				<label for='email' >Email Address:</label>
+        				<input type='email' data-error='Please Input a Valid Email' name='email' id='email' maxlength="50" value='<?php echo $default_email; ?>'/>
+              </div>
+            </div>
+            
+            <div class='row'>
+              <div class='input-field col s12'>
+                <p> Please slide to your height (in inches) </p>
+                <p class="range-field">
+                  <input type="range" id="height" min="0" max="96" />
+                </p>
+              </div>
+            </div>
+
+     				<!-- <label for='weight' >Weight:</label>
     				<input type='text' name='weight' id='weight' maxlength="50" value='<?php echo $default_weight; ?>'/>
-     				<br />
+     				<br /> -->
+
+            <div class='row'>
+              <div class='input-field col s12'>
+                <p> Please slide to your weight (in pounds) </p>
+                <p class="range-field">
+                  <input type="range" id="weight" min="12" max="96" />
+                </p>
+              </div>
+            </div>
+
      				<h3>Goals </h3>
-    				<label for='minCals' >Minimum Calories:</label>
-    				<input type='text' name='minCals' id='minCals' maxlength="5" value='<?php echo $default_minCals; ?>'/>
-    				<br />
-    				<label for='maxCals' >Maximum Calories:</label>
-    				<input type='text' name='maxCals' id='maxCals' maxlength="5" value='<?php echo $default_maxCals; ?>'/>
-    				<br />
-    				<label for='minFat' >Minimum Fat:</label>
-    				<input type='text' name='minFat' id='minFat' maxlength="5" value='<?php echo $default_minFat; ?>'/>
-    				<br />
-    				<label for='maxFat' >Maximum Fat:</label>
-    				<input type='text' name='maxFat' id='maxFat' maxlength="5" value='<?php echo $default_maxFat; ?>' />
-    				<br />
-    				<label for='minFat' >Minimum Sugar:</label>
-    				<input type='text' name='minSug' id='minSug' maxlength="5" value='<?php echo $default_minSug; ?>'/>
-    				<br />
-    				<label for='maxFat' >Maximum Sugar:</label>
-    				<input type='text' name='maxSug' id='maxSug' maxlength="5" value='<?php echo $default_maxSug; ?>' />
-    				<br />
-    				<label for='minFat' >Minimum Sodium:</label>
-    				<input type='text' name='minSodium' id='minSodium' maxlength="5" value='<?php echo $default_minSodium; ?>'/>
-    				<br />
-    				<label for='maxFat' >Maximum Sodium:</label>
-    				<input type='text' name='maxSodium' id='maxSodium' maxlength="5" value='<?php echo $default_maxSodium; ?>' />
-    				<br />
-    				<label for='minFat' >Minimum Protein:</label>
-    				<input type='text' name='minFat' id='minFat' maxlength="5" value='<?php echo $default_minFat; ?>'/>
-    				<br />
-    				<label for='maxFat' >Maximum Protein:</label>
-    				<input type='text' name='maxProtein' id='maxProtein' maxlength="5" value='<?php echo $default_maxProtein; ?>' />
-    				<br />
+
+            <div class='row'>
+              <div class='input-field col s2'>
+        				<label for='minCals' >Minimum Calories:</label>
+        				<input type='text' name='minCals' id='minCals' maxlength="5" value='<?php echo $default_minCals; ?>'/>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s2'>
+        				<label for='maxCals' >Maximum Calories:</label>
+        				<input type='text' name='maxCals' id='maxCals' maxlength="5" value='<?php echo $default_maxCals; ?>'/>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s2'>
+        				<label for='minFat' >Minimum Fat:</label>
+        				<input type='text' name='minFat' id='minFat' maxlength="5" value='<?php echo $default_minFat; ?>'/>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s2'>
+        				<label for='maxFat' >Maximum Fat:</label>
+        				<input type='text' name='maxFat' id='maxFat' maxlength="5" value='<?php echo $default_maxFat; ?>' />
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s2'>
+        				<label for='minFat' >Minimum Sugar:</label>
+        				<input type='text' name='minSug' id='minSug' maxlength="5" value='<?php echo $default_minSug; ?>'/>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s2'>
+        				<label for='maxFat' >Maximum Sugar:</label>
+        				<input type='text' name='maxSug' id='maxSug' maxlength="5" value='<?php echo $default_maxSug; ?>' />
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s2'>
+        				<label for='minFat' >Minimum Sodium:</label>
+        				<input type='text' name='minSodium' id='minSodium' maxlength="5" value='<?php echo $default_minSodium; ?>'/>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s2'>
+        				<label for='maxFat' >Maximum Sodium:</label>
+        				<input type='text' name='maxSodium' id='maxSodium' maxlength="5" value='<?php echo $default_maxSodium; ?>' />
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s2'>
+        				<label for='minFat' >Minimum Protein:</label>
+        				<input type='text' name='minFat' id='minFat' maxlength="5" value='<?php echo $default_minFat; ?>'/>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s2'>
+        				<label for='maxFat' >Maximum Protein:</label>
+        				<input type='text' name='maxProtein' id='maxProtein' maxlength="5" value='<?php echo $default_maxProtein; ?>' />
+              </div>
+            </div>
+
     				<input type='submit' name='Submit' value='Update' />
      
-    			</fieldset>
+    		
     		</form>
-        </section>
         <!-- [/content] -->
         
     </div>
     
     <a href='index.php'>Cancel</a>
+
+    <!--  Scripts-->
+  <script src='loggedInBars.js'></script>
+  <!-- // <script src='./materialize/js/jquery-2.1.1.min.js'></script> -->
+  <script src='https://code.jquery.com/jquery-2.1.1.min.js'></script>
+  <script src='./materialize/js/materialize.js'></script>
+  <script src='./materialize/js/materialize.min.js'></script>
+  <script src='./materialize/js/init.js'></script>
 
 </body>
