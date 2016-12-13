@@ -7,6 +7,9 @@ user_firstname VARCHAR(50) NOT NULL,
 user_lastname VARCHAR(50) NOT NULL,
 user_dob DATE NOT NULL,
 user_registered TIMESTAMP NOT NULL
+user_sex VARCHAR(10) NOT NULL, 
+user_height INTEGER NOT NULL CHECK(height > 0 AND height <= 96),
+user_weight INTEGER NOT NULL CHECK(weight > 0),
 );
 
 CREATE TABLE Location
@@ -60,16 +63,6 @@ locationID INTEGER NOT NULL REFERENCES Location(locationID),
 foodID INTEGER NOT NULL REFERENCES Food(foodID),
 price FLOAT NOT NULL CHECK(price>0.0), --Assuming all food has a cost
 PRIMARY KEY(restaurantID, locationID, foodID)
-);
-
-CREATE TABLE Student
-(
-student_userid INTEGER NOT NULL REFERENCES Users(user_id),
-DoB DATE NOT NULL,
-sex VARCHAR(10) NOT NULL, 
-height INTEGER NOT NULL CHECK(height > 0 AND height <= 96),
-weight INTEGER NOT NULL CHECK(weight > 0),
-foodPoints FLOAT NOT NULL CHECK(foodPoints >= 0 AND foodPoints <= 3300)
 );
 
 CREATE TABLE Ate

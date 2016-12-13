@@ -4,6 +4,9 @@ $lastname = null;
 $email = null; 
 $password = null;
 $dob = null; 
+$sex = null; 
+$height = null; 
+$weight = null; 
 
 session_start(); 
 $_SESSION['error'] = false; 
@@ -23,6 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = $_POST["email"];
         $password = $_POST["password"];
         $dob = $_POST["dob"]; 
+        $sex = $_POST["sex"]; 
+        $height = $_POST["height"]; 
+		$wight = $_POST["weight"]; 
         $date = date('Y-m-d'); 
         
     	
