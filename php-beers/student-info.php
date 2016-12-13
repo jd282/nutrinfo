@@ -68,7 +68,7 @@
     foreach($_POST as $food_id => $quantity){ 
     	//for loop because user can input multiple quantities of food
     	for($i=0;$i<$quantity;$i++){
-    		$insert_query = "INSERT INTO Ate(ate_userid, studentNetID, foodID, eatDate) VALUES('" . $userid . "', 'jd282', '" . $food_id . "', '" . $date . "')";
+    		$insert_query = "INSERT INTO Ate(ate_userid, foodID, eatDate) VALUES('" . $userid . "', '" . $food_id . "', '" . $date . "')";
     		$insert_result = $dbh->query($insert_query); 
     	}
   	}

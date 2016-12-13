@@ -46,10 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     		exit(); 
     	}
     	
-    	//insert registration info into the Users table 
-    	$query = "INSERT INTO Users(user_id, user_email, user_password, user_firstname, user_lastname, user_dob, user_registered) VALUES(DEFAULT, $1, $2, $3, $4, $5, $6)";
-   		$result = pg_prepare($dbconn, "my_query", $query);
-   		$result = pg_execute($dbconn, "my_query", array($email,$password,$firstname,$lastname,$dob, $date));
+    	//insert registration info into the Users table     	
+    	$query = "INSERT INTO Users(user_id, user_email, user_password, user_firstname, user_lastname, user_dob, user_registered, user_sex, user_height, user_weight) VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+   		$result = $dbh->prepare($query);
+   		$result = pg_execute($dbconn, "my_query", array($email,$password,$firstname,$lastname,$dob, $date, $sex, $height, $weight));
    		
    		header('Location: login.php');  
         
@@ -130,6 +130,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class='input-field col s12'>
                         <input placeholder='Password' name='password' id='password' type='password' maxlength='50' required/>
                         <label for='password'> Password </label>
+                    </div>
+                </div>
+                
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <input placeholder='Sex' name='sex' id='sex' type='text' maxlength='50' required/>
+                        <label for='sex'> Sex </label>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <input placeholder='Height' name='height' id='height' type='text' maxlength='50' required/>
+                        <label for='height'> Height </label>
+                    </div>
+                </div>
+                
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <input placeholder='Weight' name='weight' id='weight' type='text' maxlength='50' required/>
+                        <label for='weight'> Weight </label>
                     </div>
                 </div>
 
