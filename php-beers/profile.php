@@ -61,15 +61,56 @@
         $query = $dbh->query("SELECT * FROM Ate,Food WHERE Food.foodid = Ate.foodid and Ate.eatDate >= '$date' and ate_userid=" . $userid . "ORDER BY eatDate DESC"); 
 		echo "You ate: <br/>"; 
 		$row = $query->fetch(); 
+
 		if(empty($row)){
     			echo "Nothing for today!"; 
     	}else{
-    		echo $row['name'] . " " . $row['calories'] . " cal on ". $row[2] . "<br/>";
+        echo "<table class='striped'>";
+          echo "<thead>";
+            echo "<tr>";
+              echo "<th>";
+                echo "Food";
+              echo "</th>";
+              echo "<th>";
+                echo "Calories";
+              echo "</th>";
+              echo "<th>";
+                echo "Date and time";
+              echo "</th>";
+            echo "</tr>";
+          echo "</thead>";
+          echo "<tbody>";
+
+          echo "<tr>";
+            echo "<td>";
+              echo $row['name'];
+            echo "</td>";
+            echo "<td>"
+              echo $row['calories'];
+            echo "</td>";
+            echo "<td>";
+              echo $row[2];
+            echo "</td>";
+          echo "</tr>";
+          //the part above is solely for the first one and the others are below
+
+    		// echo $row['name'] . " " . $row['calories'] . " cal on ". $row[2] . "<br/>";
     		while($row = $query->fetch()) {
-    			echo $row['name'] . " " . $row['calories'] . " cal on ". $row[2] . "<br/>";
+          echo "<tr>";
+            echo "<td>";
+              echo $row['name'];
+            echo "</td>";
+            echo "<td>"
+              echo $row['calories'];
+            echo "</td>";
+            echo "<td>";
+              echo $row[2];
+            echo "</td>";
+          echo "</tr>";
+    			// echo $row['name'] . " " . $row['calories'] . " cal on ". $row[2] . "<br/>";
     		}
 		}
-        echo "<br/>\n";
+        echo "</tbody></table>";
 
       } catch (PDOException $e) {
         print "Database error: " . $e->getMessage() . "<br/>";
