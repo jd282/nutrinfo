@@ -61,7 +61,7 @@
             for($i=0;$i<=$quantity;$i++){
             	echo "<option value='" . $i . "'>" . $i . "</option>";
             }
-            echo "</select></div";
+            echo "</select></div>";
             echo $myrow[1] . "<br/>";
 
           } while ($myrow = $st->fetch());
