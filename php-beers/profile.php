@@ -100,7 +100,7 @@
             echo "<td>";
               echo $row['name'];
             echo "</td>";
-            echo "<td>"
+            echo "<td>";
               echo $row['calories'];
             echo "</td>";
             echo "<td>";
