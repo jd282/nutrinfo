@@ -73,6 +73,18 @@
     	}
   	}
     
+    if(isset($_POST['deleteItem']))
+	{
+  		// here comes your delete query: use $_POST['deleteItem'] as your id
+ 		// $delete = $_POST['deleteItem']
+  		// $sql = "DELETE FROM `tablename` where `id` = '$delete'"; 
+  		$delte = $_POST['deleteItem']; 
+  		$q = "DELETE FROM Ate WHERE ate_userid='$userid' AND $ate_foodid='$delete'"; 
+  		$query = $dbh->query($q); 
+
+	}
+    
+    
     //calculate number of calories consumed on current day
 	$cal_query = "SELECT COALESCE(SUM(calories),0) FROM Ate, Food WHERE Food.foodid = Ate.foodid and Ate.eatDate >= '$date2' and ate_userid=" . $userid;
 	$c_query = $dbh->query($cal_query);
@@ -87,6 +99,7 @@
 		<th>Food</th>
 		<th>Calories</th>
 		<th>Time</th>
+		<th>Delete</th>
 	</tr>";
     while($row = $query->fetch()) {
     	//echo $row['name'] . " " . $row['calories'] . " cal on ". $row[3] . "<br/>";
@@ -94,7 +107,10 @@
     	<tr style='border: 1px solid black;'>
     		<td>" . $row['name'] . "</td>
     		<td>" . $row['calories'] . "</td>
-    		<td>" . $row[3] . "</td>
+    		<td>" . $row[2] . "</td>
+    		<form action='student-info.php' method='post'>
+    			<td><a class='btn-floating btn-large waves-effect waves-light red'><i class='material-icons'>delete</i><input type='submit' name='deleteItem' value='".$row[0]."'/></a> </td>
+    		</form>
     	</tr>
     	";
     }

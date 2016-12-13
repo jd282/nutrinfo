@@ -47,7 +47,7 @@
 			echo "Your calorie goal is between " . $g_row[1] . " and " . $g_row[0] . " calories. <br/>"; 
 		}
 		else{
-			echo "You have not set a goal yet! Click <a href='#'>here</a> to set one. <br/>"; 
+			echo "You have not set a goal yet! Click <a href='edit_profile.php'>here</a> to set one. <br/>"; 
 		}
     	//echo "Your calorie goal is between " . $g_row[7] . " and " . $g_row[2] . " calories. <br/>"; 
         
@@ -64,9 +64,9 @@
 		if(empty($row)){
     			echo "Nothing for today!"; 
     	}else{
-    		echo $row['name'] . " " . $row['calories'] . " cal on ". $row[3] . "<br/>";
+    		echo $row['name'] . " " . $row['calories'] . " cal on ". $row[2] . "<br/>";
     		while($row = $query->fetch()) {
-    			echo $row['name'] . " " . $row['calories'] . " cal on ". $row[3] . "<br/>";
+    			echo $row['name'] . " " . $row['calories'] . " cal on ". $row[2] . "<br/>";
     		}
 		}
         echo "<br/>\n";

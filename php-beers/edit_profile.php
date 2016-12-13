@@ -168,7 +168,7 @@
               <div class='input-field col s12'>
                 <p> Please slide to your height (in inches) </p>
                 <p class="range-field">
-                  <input type="range" id="height" min="0" max="96" />
+                  <input type="range" id="height" min="0" max="96" value='<?php echo $default_height; ?>'/>
                 </p>
               </div>
             </div>
@@ -181,7 +181,7 @@
               <div class='input-field col s12'>
                 <p> Please slide to your weight (in pounds) </p>
                 <p class="range-field">
-                  <input type="range" id="weight" min="12" max="96" />
+                  <input type="range" id="weight" min="12" max="96" value='<?php echo $default_weight; ?>'/>
                 </p>
               </div>
             </div>

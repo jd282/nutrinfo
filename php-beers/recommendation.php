@@ -33,32 +33,18 @@
   }
   try {
   	$current_date = date('Y-m-d'); 
-
+	
 	$goals_query = "SELECT maxCals,minCals FROM Goals WHERE goals_userid=" . $userid; 
 	$g_query = $dbh->query($goals_query); 
 	$g_row = $g_query->fetch(); 
 	
+	$myrow = null; 
 	if(!empty($g_row)){
 		echo "Your calorie goal is between " . $g_row[1] . " and " . $g_row[0] . " calories. <br/>"; 
 		
-		
-		
-	}
-	else{
-		echo "You have not set a goal yet! Click <a href='#edit_profile.php'>here</a> to set one. <br/>"; 
-		echo "Until you set a goal, here are random 5 food suggestions :)";
-		$myrow = null; 
 		$rec_query = "SELECT Food.name, Restaurant.name, Food.calories
-						FROM Restaurant, Food, Serves
-						ORDER BY RANDOM()
-						LIMIT 5
-						WHERE Restaurant.restaurantID=Serves.restaurantID and Food.foodID=Serves.foodID"; 
-		
-	}
-		
-	/*
-	IF 
-(0 >= ((SELECT Goals.maxCals
+						CASE 
+							WHEN (0 >= ((SELECT Goals.maxCals
 	FROM Goals
 	WHERE Goals.goals_userid ='" . $userid . "') - 
 		COALESCE((SELECT SUM(Food.calories)
@@ -82,8 +68,24 @@ ELSE (
 	FROM Restaurant, Food, Serves
 	ORDER BY RANDOM()
 	LIMIT 5
-	WHERE Restaurant.restaurantID=Serves.restaurantID and Food.foodID=Serves.foodID)
-	*/
+	WHERE Restaurant.restaurantID=Serves.restaurantID and Food.foodID=Serves.foodID) 
+END"; 
+		
+		
+		
+	}
+	else{
+		echo "You have not set a goal yet! Click <a href='edit_profile.php'>here</a> to set one. <br/>"; 
+		echo "Until you set a goal, here are random 5 food suggestions :)";
+		
+		$rec_query = "SELECT Food.name, Restaurant.name, Food.calories
+					FROM Restaurant, Food, Serves
+					WHERE Restaurant.restaurantID=Serves.restaurantID and Food.foodID=Serves.foodID
+						ORDER BY RANDOM()
+						LIMIT 5"; 	
+	}
+		
+	/*
 	$myrow = null; 
 	$rec_query = "SELECT Food.name, Restaurant.name, Food.calories
 FROM Restaurant, Food, Serves
@@ -93,7 +95,9 @@ WHERE Restaurant.restaurantID=Serves.restaurantID and Food.foodID=Serves.foodID 
 		COALESCE((SELECT SUM(Food.calories)
 		FROM Ate, Food
 		WHERE Ate.foodID = Food.foodID AND Ate.ate_userid='" . $userid . "' and Ate.eatDate >= '$current_date'),0))"; 
+	*/
 	echo "
+	
 	<table>
 		<tr>
 			<th>Restaurant</th>
@@ -103,9 +107,6 @@ WHERE Restaurant.restaurantID=Serves.restaurantID and Food.foodID=Serves.foodID 
 	";
 	$rec_q = $dbh->query($rec_query); 
 	do{	
-		//echo "$myrow[0]"; 
-		//echo "$myrow[1]"; 
-		//echo "$myrow[2]" . "<br/>";
 		echo "
 		<tr>
 			<td> " . $myrow[1] . "</td>
@@ -114,10 +115,6 @@ WHERE Restaurant.restaurantID=Serves.restaurantID and Food.foodID=Serves.foodID 
 		</tr>
 		";
 		
-	
-	//$rec_row = $rec_q->fetch(); 
-	
-	
 	}while ($myrow = $rec_q->fetch());
 	echo "</table>";
 	

@@ -28,10 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $dob = $_POST["dob"]; 
         $sex = $_POST["sex"]; 
         $height = $_POST["height"]; 
-		$wight = $_POST["weight"]; 
+		$weight = $_POST["weight"]; 
         $date = date('Y-m-d'); 
         
-    	
     	$dbconn = pg_connect("host=localhost dbname=nutrinfo user=vagrant password=dbpasswd")
     		or die('Could not connect: ' . pg_last_error());
     	
@@ -49,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     	//insert registration info into the Users table     	
     	$query = "INSERT INTO Users(user_id, user_email, user_password, user_firstname, user_lastname, user_dob, user_registered, user_sex, user_height, user_weight) VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
    		$result = $dbh->prepare($query);
-   		$result = pg_execute($dbconn, "my_query", array($email,$password,$firstname,$lastname,$dob, $date, $sex, $height, $weight));
+   		$result->execute(array($email, $password, $firstname, $lastname, $dob, $date, $sex, $height, $weight));
    		
    		header('Location: login.php');  
         
