@@ -87,12 +87,6 @@ minSodium INTEGER CHECK(minSodium >= 0),
 minProtein INTEGER CHECK(minProtein >= 0)
 );
 
-CREATE TABLE Warnings
-(
-theUserID VARCHAR(10) NOT NULL REFERENCES Users(user_id),
-warningDate DATE NOT NULL,
-message VARCHAR(70) NOT NULL CHECK(message IN ('You have exceeded your maximum daily calorie intake! :(', 'You have not reached your minimum daily calorie intake yet!'))
-);
 /*
 CREATE FUNCTION TF_food_ref() RETURNS TRIGGER AS $$
 BEGIN
