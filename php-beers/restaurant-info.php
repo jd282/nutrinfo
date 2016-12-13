@@ -58,8 +58,9 @@
             $quantity = 10; //people can select quantity of 1-10 for each food
             echo "<label>";
             echo $myrow[1];
-            echo "</label";
+            echo "</label>";
             echo "<select class='browser-default' name='" . $myrow[0] . "' >";
+            echo "<option value='0' disabled selected>0</option>";
             for($i=0;$i<=$quantity;$i++){
             	echo "<option value='" . $i . "'>" . $i . "</option>";
             }
