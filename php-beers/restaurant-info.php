@@ -56,7 +56,7 @@
           do {
             // echo produces output HTML:
             $quantity = 10; //people can select quantity of 1-10 for each food
-            echo "<div class='input-field col s2'>" 
+            echo "<div class='input-field col s2'>";
             echo "<select name='" . $myrow[0] . "' >";
             for($i=0;$i<=$quantity;$i++){
             	echo "<option value='" . $i . "'>" . $i . "</option>";
