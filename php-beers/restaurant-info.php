@@ -61,7 +61,7 @@
             echo "</label>";
             echo "<select class='browser-default' name='" . $myrow[0] . "' >";
             echo "<option value='0' disabled selected>0</option>";
-            for($i=0;$i<=$quantity;$i++){
+            for($i=1;$i<=$quantity;$i++){
             	echo "<option value='" . $i . "'>" . $i . "</option>";
             }
             echo "</select>";
