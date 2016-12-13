@@ -65,7 +65,6 @@ PRIMARY KEY(restaurantID, locationID, foodID)
 CREATE TABLE Student
 (
 student_userid INTEGER NOT NULL REFERENCES Users(user_id),
-studentNetID VARCHAR(10) NOT NULL,
 DoB DATE NOT NULL,
 sex VARCHAR(10) NOT NULL, 
 height INTEGER NOT NULL CHECK(height > 0 AND height <= 96),
@@ -76,7 +75,6 @@ foodPoints FLOAT NOT NULL CHECK(foodPoints >= 0 AND foodPoints <= 3300)
 CREATE TABLE Ate
 (
 ate_userid INTEGER NOT NULL REFERENCES Users(user_id),
-studentNetID VARCHAR(10) NOT NULL,
 foodID INTEGER NOT NULL REFERENCES Food(FoodID),
 eatDate TIMESTAMP(20) NOT NULL
 );
@@ -84,22 +82,21 @@ eatDate TIMESTAMP(20) NOT NULL
 CREATE TABLE Goals
 (
 goals_userid INTEGER NOT NULL REFERENCES Users(user_id),
-studentNetID VARCHAR(10) NOT NULL ,
-maxCals INTEGER CHECK(maxCals IS NULL OR maxCals >= 0),
-maxFat INTEGER CHECK(maxFat IS NULL OR maxFat >= 0),
-maxSug INTEGER CHECK(maxSug IS NULL OR maxSug >= 0),
-maxSodium INTEGER CHECK(maxSodium IS NULL OR maxSodium >= 0),
-maxProtein INTEGER CHECK(maxProtein IS NULL OR maxProtein >= 0),
-minCals INTEGER CHECK(minCals IS NULL OR (minCals >= 0)),
-minFat INTEGER CHECK(minFat IS NULL OR (minFat >= 0)),
-minSug INTEGER CHECK(minSug IS NULL OR (minSug >= 0 )),
-minSodium INTEGER CHECK(minSodium IS NULL OR (minSodium >= 0)),
-minProtein INTEGER CHECK(minProtein IS NULL OR (minProtein >= 0))
+maxCals INTEGER CHECK(maxCals >= 0),
+maxFat INTEGER CHECK(maxFat >= 0),
+maxSug INTEGER CHECK(maxSug >= 0),
+maxSodium INTEGER CHECK(maxSodium >= 0),
+maxProtein INTEGER CHECK(maxProtein >= 0),
+minCals INTEGER CHECK(minCals >= 0),
+minFat INTEGER CHECK(minFat >= 0),
+minSug INTEGER CHECK(minSug >= 0 ),
+minSodium INTEGER CHECK(minSodium >= 0),
+minProtein INTEGER CHECK(minProtein >= 0)
 );
 
 CREATE TABLE Warnings
 (
-studentNetID VARCHAR(10) NOT NULL REFERENCES Student(studentNetID),
+studentNetID VARCHAR(10) NOT NULL REFERENCES Users(user_id),
 warningDate DATE NOT NULL,
 message VARCHAR(70) NOT NULL CHECK(message IN ('You have exceeded your maximum daily calorie intake! :(', 'You have not reached your minimum daily calorie intake yet!'))
 );

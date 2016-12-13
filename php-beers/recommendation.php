@@ -33,17 +33,57 @@
   }
   try {
   	$current_date = date('Y-m-d'); 
-  /*
- 	$rec_query = "SELECT Restaurant.name, Food.name, Food.calories, Serves.price
+
+	$goals_query = "SELECT maxCals,minCals FROM Goals WHERE goals_userid=" . $userid; 
+	$g_query = $dbh->query($goals_query); 
+	$g_row = $g_query->fetch(); 
+	
+	if(!empty($g_row)){
+		echo "Your calorie goal is between " . $g_row[1] . " and " . $g_row[0] . " calories. <br/>"; 
+		
+		
+		
+	}
+	else{
+		echo "You have not set a goal yet! Click <a href='#edit_profile.php'>here</a> to set one. <br/>"; 
+		echo "Until you set a goal, here are random 5 food suggestions :)";
+		$myrow = null; 
+		$rec_query = "SELECT Food.name, Restaurant.name, Food.calories
+						FROM Restaurant, Food, Serves
+						ORDER BY RANDOM()
+						LIMIT 5
+						WHERE Restaurant.restaurantID=Serves.restaurantID and Food.foodID=Serves.foodID"; 
+		
+	}
+		
+	/*
+	IF 
+(0 >= ((SELECT Goals.maxCals
+	FROM Goals
+	WHERE Goals.goals_userid ='" . $userid . "') - 
+		COALESCE((SELECT SUM(Food.calories)
+		FROM Ate, Food
+		WHERE Ate.foodID = Food.foodID AND Ate.ate_userid='" . $userid . "' and Ate.eatDate >= '$current_date'),0)))
+
+THEN (
+SELECT Food.name, Restaurant.name, Food.calories
 FROM Restaurant, Food, Serves
-WHERE Food.calories <=
+ORDER BY Food.calories DESC
+WHERE Restaurant.restaurantID=Serves.restaurantID and Food.foodID=Serves.foodID and Food.calories <= 
 	((SELECT Goals.maxCals
 	FROM Goals
-	WHERE Goals.studentNetID = 'jd282') - 
-		(SELECT SUM(Food.calories)
+	WHERE Goals.goals_userid ='" . $userid . "') - 
+		COALESCE((SELECT SUM(Food.calories)
 		FROM Ate, Food
-		WHERE Ate.foodID = Food.foodID AND Ate.studentNetID = 'jd282'))";  // Ate.eatDate >= $current_date  AND Ate.studentNetID = 'jd282'
-		*/
+		WHERE Ate.foodID = Food.foodID AND Ate.ate_userid='" . $userid . "' and Ate.eatDate >= '$current_date'),0)))
+
+ELSE (
+	SELECT Food.name, Restaurant.name, Food.calories
+	FROM Restaurant, Food, Serves
+	ORDER BY RANDOM()
+	LIMIT 5
+	WHERE Restaurant.restaurantID=Serves.restaurantID and Food.foodID=Serves.foodID)
+	*/
 	$myrow = null; 
 	$rec_query = "SELECT Food.name, Restaurant.name, Food.calories
 FROM Restaurant, Food, Serves

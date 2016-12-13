@@ -60,17 +60,15 @@
         //Display foods that user has eaten
         $query = $dbh->query("SELECT * FROM Ate,Food WHERE Food.foodid = Ate.foodid and Ate.eatDate >= '$date' and ate_userid=" . $userid . "ORDER BY eatDate DESC"); 
 		echo "You ate: <br/>"; 
-		
-		
+		$row = $query->fetch(); 
 		if(empty($row)){
-			echo "Nothing so far today! <br/>";
-
-		}
-		
-    	while($row = $query->fetch()) {
+    			echo "Nothing for today!"; 
+    	}else{
     		echo $row['name'] . " " . $row['calories'] . " cal on ". $row[3] . "<br/>";
-    	}
-
+    		while($row = $query->fetch()) {
+    			echo $row['name'] . " " . $row['calories'] . " cal on ". $row[3] . "<br/>";
+    		}
+		}
         echo "<br/>\n";
 
       } catch (PDOException $e) {

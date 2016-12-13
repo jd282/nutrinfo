@@ -61,7 +61,7 @@
 		echo "Your calorie goal is between " . $g_row[1] . " and " . $g_row[0] . " calories. <br/>"; 
 	}
 	else{
-		echo "You have not set a goal yet! Click <a href='#'>here</a> to set one. <br/>"; 
+		echo "You have not set a goal yet! Click <a href='edit_profile.php'>here</a> to set one. <br/>"; 
 	}
     
     //insert new food into Ate table in database
