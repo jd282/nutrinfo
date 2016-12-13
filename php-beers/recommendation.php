@@ -39,39 +39,32 @@
 	$g_row = $g_query->fetch(); 
 	
 	$myrow = null; 
+	$a_row = null; 
+	$ate_query = null; 
+	
 	if(!empty($g_row)){
-		echo "Your calorie goal is between " . $g_row[1] . " and " . $g_row[0] . " calories. <br/>"; 
+		$ate_query = "SELECT COALESCE(SUM(Food.calories),0)
+					FROM Ate, Food
+					WHERE Ate.foodID = Food.foodID AND Ate.ate_userid='$userid' and Ate.eatDate >= '$current_date'" ; 
+		$a_query = $dbh->query($ate_query); 
+		$a_row = $a_query->fetch(); 
 		
-		$rec_query = "SELECT Food.name, Restaurant.name, Food.calories
-						CASE 
-							WHEN (0 >= ((SELECT Goals.maxCals
-	FROM Goals
-	WHERE Goals.goals_userid ='" . $userid . "') - 
-		COALESCE((SELECT SUM(Food.calories)
-		FROM Ate, Food
-		WHERE Ate.foodID = Food.foodID AND Ate.ate_userid='" . $userid . "' and Ate.eatDate >= '$current_date'),0)))
-
-THEN (
-SELECT Food.name, Restaurant.name, Food.calories
-FROM Restaurant, Food, Serves
-ORDER BY Food.calories DESC
-WHERE Restaurant.restaurantID=Serves.restaurantID and Food.foodID=Serves.foodID and Food.calories <= 
-	((SELECT Goals.maxCals
-	FROM Goals
-	WHERE Goals.goals_userid ='" . $userid . "') - 
-		COALESCE((SELECT SUM(Food.calories)
-		FROM Ate, Food
-		WHERE Ate.foodID = Food.foodID AND Ate.ate_userid='" . $userid . "' and Ate.eatDate >= '$current_date'),0)))
-
-ELSE (
-	SELECT Food.name, Restaurant.name, Food.calories
-	FROM Restaurant, Food, Serves
-	ORDER BY RANDOM()
-	LIMIT 5
-	WHERE Restaurant.restaurantID=Serves.restaurantID and Food.foodID=Serves.foodID) 
-END"; 
-		
-		
+		if($a_row[0] > $g_row[0]){
+			echo "You've surpassed your calorie goal for the day, so here are 5 random suggestions of foods to try! "; 
+			$rec_query = "SELECT Food.name, Restaurant.name, Food.calories
+					FROM Restaurant, Food, Serves
+					WHERE Restaurant.restaurantID=Serves.restaurantID and Food.foodID=Serves.foodID
+						ORDER BY RANDOM()
+						LIMIT 5"; 	
+		} else {
+		//echo "Your calorie goal is between " . $g_row[1] . " and " . $g_row[0] . " calories. <br/>"; 
+			echo "Some food recommendations that keep you under your max calorie goal:"; 
+			$left = $g_row[0] - $a_row[0]; //goal calories - calories already eaten
+			$rec_query = "SELECT Food.name, Restaurant.name, Food.calories
+						FROM Restaurant, Food, Serves
+						WHERE Restaurant.restaurantID=Serves.restaurantID and Food.foodID=Serves.foodID and Food.calories <='$left'
+						ORDER BY Food.calories DESC"; 
+		}
 		
 	}
 	else{
@@ -116,6 +109,8 @@ WHERE Restaurant.restaurantID=Serves.restaurantID and Food.foodID=Serves.foodID 
 		";
 		
 	}while ($myrow = $rec_q->fetch());
+	
+	
 	echo "</table>";
 	
   }
@@ -125,6 +120,7 @@ catch (PDOException $e) {
   }
   
 ?>
+	<?= $rec_q->rowCount() ?> food(s) found in the database.<br/> 
 	<script src="loggedInBars.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="./materialize/js/materialize.js"></script>

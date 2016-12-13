@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <label for='sex'> Sex </label>
                     </div> -->
                     <label>Sex</label>
-                    <select class='browser-default'>
+                    <select class='browser-default' required id='sex' name='sex'>
                         <option value='' disabeled selected>Please Choose Your Sex</option>
                         <option value='M'>Male</option>
                         <option value='F'>Female</option>
@@ -162,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class='input-field col s12'>
                         <p> Please slide to your height (in inches) </p>
                         <p class="range-field">
-                            <input type="range" id="height" min="0" max="96" />
+                            <input type="range" name='height' id="height" min="0" max="96" value='-1' required />
                         </p>
                     </div>
                 </div>
@@ -171,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class='input-field col s12'>
                         <p> Please slide to your weight (in pounds) </p>
                         <p class="range-field">
-                            <input type="range" id="weight" min="12" max="96" />
+                            <input type="range" name='weight' id="weight" min="12" max="96" value='' required />
                         </p>
                     </div>
                 </div>

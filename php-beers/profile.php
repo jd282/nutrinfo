@@ -63,7 +63,7 @@
 		$row = $query->fetch(); 
 
 		if(empty($row)){
-    			echo "Nothing for today!"; 
+    			echo "Nothing for today! <br/><br/>"; 
     	}else{
         echo "<table class='striped'>";
           echo "<thead>";
@@ -85,7 +85,7 @@
             echo "<td>";
               echo $row['name'];
             echo "</td>";
-            echo "<td>"
+            echo "<td>"; 
               echo $row['calories'];
             echo "</td>";
             echo "<td>";

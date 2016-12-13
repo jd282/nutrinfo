@@ -6,10 +6,10 @@ user_password VARCHAR(64) NOT NULL,
 user_firstname VARCHAR(50) NOT NULL,
 user_lastname VARCHAR(50) NOT NULL,
 user_dob DATE NOT NULL,
-user_registered TIMESTAMP NOT NULL
-user_sex CHAR(1) CHECK (user_sex IS NOT NULL AND user_sex IN ('M', 'F') ),
+user_registered TIMESTAMP NOT NULL,
+user_sex VARCHAR(20) NOT NULL,
 user_height INTEGER NOT NULL CHECK(user_height > 0 AND user_height <= 96), --measured in inches
-user_weight INTEGER NOT NULL CHECK(user_weight > 0 AND user_weight <= 1500), --measured in pounds
+user_weight INTEGER NOT NULL CHECK(user_weight > 0 AND user_weight <= 1500) --measured in pounds
 );
 
 CREATE TABLE Location
