@@ -19,7 +19,7 @@
     die();
   }
   try {
-    $st = $dbh->query("SELECT * FROM Food, Serves,Restaurant WHERE Serves.restaurantID='$restaurantid' and Serves.foodID=Food.foodID and Restaurant.restaurantID=Serves.restaurantID");
+    $st = $dbh->query("SELECT * FROM Food, Serves,Restaurant WHERE Serves.restaurantID='$restaurantid' and Serves.foodID=Food.foodID and Restaurant.restaurantID=Serves.restaurantID ORDER BY Food.name");
     if (($myrow = $st->fetch())) {
 ?>
 

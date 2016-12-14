@@ -61,7 +61,6 @@ CREATE TABLE Serves
 restaurantID INTEGER NOT NULL REFERENCES Restaurant(restaurantID),
 locationID INTEGER NOT NULL REFERENCES Location(locationID),
 foodID INTEGER NOT NULL REFERENCES Food(foodID),
-price FLOAT NOT NULL CHECK(price>0.0), --Assuming all food has a cost
 PRIMARY KEY(restaurantID, locationID, foodID)
 );
 

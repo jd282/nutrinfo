@@ -46,7 +46,7 @@ if (!isset($_POST['student'])) {
         die();
       }
       try {
-        $st = $dbh->query('SELECT * FROM Restaurant ');
+        $st = $dbh->query('SELECT * FROM Restaurant ORDER BY name');
         if (($myrow = $st->fetch())) {
     ?>
     <form method="post" action="restaurant-info.php">

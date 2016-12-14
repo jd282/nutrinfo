@@ -48,7 +48,7 @@
                 $r_id = $myrow[0]; 
                 //print $r_id;
                 //Food(foodID, name, calories, totalFat, transFat, saturatedFat, cholesterol, sodium, carbs, fiber, sugars, protein, vitaminA, vitaminC, vitaminD, calcium, iron)
-                $foods_q = $dbh->query('SELECT Food.name, Food.foodID, Food.calories, Food.totalFat, Food.transFat, Food.saturatedFat, Food.cholesterol, Food.sodium, Food.carbs, Food.fiber, Food.sugars, Food.protein, Food.vitaminA, Food.vitaminC, Food.vitaminD, Food.calcium, Food.iron FROM Serves, Food WHERE Serves.restaurantID=' . $r_id . ' AND Food.foodID=Serves.foodID'); 
+                $foods_q = $dbh->query('SELECT Food.name, Food.foodID, Food.calories, Food.totalFat, Food.transFat, Food.saturatedFat, Food.cholesterol, Food.sodium, Food.carbs, Food.fiber, Food.sugars, Food.protein, Food.vitaminA, Food.vitaminC, Food.vitaminD, Food.calcium, Food.iron FROM Serves, Food WHERE Serves.restaurantID=' . $r_id . ' AND Food.foodID=Serves.foodID ORDER BY Food.name'); 
                 if(($food = $foods_q->fetch())){
                 	do{ 
                 		//echo $food['name'] . "<br/>";
