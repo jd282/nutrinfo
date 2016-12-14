@@ -110,7 +110,7 @@
     			// echo $row['name'] . " " . $row['calories'] . " cal on ". $row[2] . "<br/>";
     		}
 		}
-        echo "</tbody></table>";
+        echo "</tbody></table><br/><br/>";
 
       } catch (PDOException $e) {
         print "Database error: " . $e->getMessage() . "<br/>";
