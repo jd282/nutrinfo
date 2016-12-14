@@ -3,11 +3,11 @@ document.getElementById('topbar').innerHTML =
 	    "<div class='nav-wrapper container'><a id='logo-container' href='#' class='brand-logo'>Cameron Hungries</a>" +
 	      "<ul class='right hide-on-med-and-down'>"+
 	      "<li><a href='login.php'>Log In</a></li>" +
-	        "<li><a href='./menu.php'>Menus</a></li>" +
+	        "<li><a href='./menu-n.php'>Menus</a></li>" +
 	      "</ul>" +
 
 	      "<ul id='nav-mobile' class='side-nav' style='transform: translateX(-100%);'>" +
-	        "<li><a href='menu.php'>Menus</a></li>" +
+	        "<li><a href='menu-n.php'>Menus</a></li>" +
 	        "<li><a href='all-restaurants.php'>Add Food</a></li>" +
 	        "<li><a href='recommendation.php'>Recommendations</a></li>" +
 	        "<li><a href='profile.php'>My Profile</a></li>" +

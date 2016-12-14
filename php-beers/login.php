@@ -1,5 +1,4 @@
 <?php
-/* basic php authentication by Jonathan Schnittger 2013 */
 $username = null;
 $password = null;
 
