@@ -42,7 +42,7 @@
         <h5 class='header col s12 light'>A place to maintain your health and your food points. All in one place</h5>
       </div>
       <div class='row center'>
-        <a href='login.php' id='download-button' class='btn-large waves-effect waves-light orange'>Get Started</a>
+        <a href='menu.php' id='download-button' class='btn-large waves-effect waves-light orange'>Get Started</a>
       </div>
       <br><br>
 
