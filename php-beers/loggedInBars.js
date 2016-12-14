@@ -9,10 +9,12 @@ document.getElementById('topbar').innerHTML =
 	        "<li><a href='logout.php'>Log Out</a></li>" +
 	      "</ul>" +
 
-	      "<ul id='nav-mobile' class='side-nav' style='transform: translateX(-100%);'>" +
-	        "<li><a href='#'>Log In</a></li>" +
-	        "<li><a href='#'>We Out Here</a></li>" +
-	        "<li><a href='#'>Get Fit</a></li>" +
+	      "<ul id='nav-mobile' class='side-nav' style='transform: translateX(-100%);'>"
+	      	"<li><a href='menu.php'>Menus</a></li>" +
+	        "<li><a href='all-restaurants.php'>Add Food</a></li>" +
+	        "<li><a href='recommendation.php'>Recommendations</a></li>" +
+	        "<li><a href='profile.php'>My Profile</a></li>" +
+	        "<li><a href='logout.php'>Log Out</a></li>" +
 	      "</ul>" +
 	      "<a href='#' data-activates='nav-mobile' class='button-collapse'><i class='material-icons'>menu</i></a>" +
 	    "</div>" +
