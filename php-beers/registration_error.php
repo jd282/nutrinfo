@@ -4,6 +4,9 @@ $lastname = null;
 $email = null; 
 $password = null;
 $dob = null; 
+$sex = null; 
+$height = null; 
+$weight = null; 
 
 session_start(); 
 $_SESSION['error'] = false; 
@@ -23,9 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = $_POST["email"];
         $password = $_POST["password"];
         $dob = $_POST["dob"]; 
+        $sex = $_POST["sex"]; 
+        $height = $_POST["height"]; 
+		$weight = $_POST["weight"]; 
         $date = date('Y-m-d'); 
         
-    	
     	$dbconn = pg_connect("host=localhost dbname=nutrinfo user=vagrant password=dbpasswd")
     		or die('Could not connect: ' . pg_last_error());
     	
@@ -35,15 +40,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     	$check_result = pg_execute($dbconn, "my_q", array($email));
     	$myrow = pg_fetch_assoc($check_result);
     	
-    	if(!empty($myrow) || is_null($myrow)){ 
+    	if(!empty($myrow) || is_null($myrow)){
      		header('Location: registration_error.php');
     		exit(); 
     	}
     	
-    	//insert registration info into the Users table 
-    	$query = "INSERT INTO Users(user_id, user_email, user_password, user_firstname, user_lastname, user_dob, user_registered) VALUES(DEFAULT, $1, $2, $3, $4, $5, $6)";
-   		$result = pg_prepare($dbconn, "my_query", $query);
-   		$result = pg_execute($dbconn, "my_query", array($email,$password,$firstname,$lastname,$dob, $date));
+    	//insert registration info into the Users table     	
+    	$query = "INSERT INTO Users(user_id, user_email, user_password, user_firstname, user_lastname, user_dob, user_registered, user_sex, user_height, user_weight) VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+   		$result = $dbh->prepare($query);
+   		$result->execute(array($email, $password, $firstname, $lastname, $dob, $date, $sex, $height, $weight));
    		
    		header('Location: login.php');  
         
@@ -74,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         		<h1>Registration</h1>
         	</hgroup>
         </header>    
-    	<h3> This email is already taken!</h3>
+    	<h3>This email is already registered!</h3>
         <div class='row'>
         	<form class='col s12' id='register' method='post' accept-charset='UTF-8'>
     			<!-- <fieldset>
@@ -124,6 +129,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class='input-field col s12'>
                         <input placeholder='Password' name='password' id='password' type='password' maxlength='50' required/>
                         <label for='password'> Password </label>
+                    </div>
+                </div>
+                
+                <div class='row'>
+                    <!-- <div class='input-field col s12'>
+                        <input placeholder='Sex' name='sex' id='sex' type='text' maxlength='50' required/>
+                        <label for='sex'> Sex </label>
+                    </div> -->
+                    <label>Sex</label>
+                    <select class='browser-default' required id='sex' name='sex'>
+                        <option value='' disabeled selected>Please Choose Your Sex</option>
+                        <option value='M'>Male</option>
+                        <option value='F'>Female</option>
+                    </select>
+                </div>
+                <!-- <div class='row'>
+                    <div class='input-field col s12'>
+                        <input placeholder='Height' name='height' id='height' type='text' maxlength='50' required/>
+                        <label for='height'> Height </label>
+                    </div>
+                </div>
+                
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <input placeholder='Weight' name='weight' id='weight' type='text' maxlength='50' required/>
+                        <label for='weight'> Weight </label>
+                    </div>
+                </div> -->
+
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <p> Please slide to your height (in inches) </p>
+                        <p class="range-field">
+                            <input type="range" name='height' id="height" min="0" max="96" value='64' required />
+                        </p>
+                    </div>
+                </div>
+
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <p> Please slide to your weight (in pounds) </p>
+                        <p class="range-field">
+                            <input type="range" name='weight' id="weight" min="50" max="500" value='150' required />
+                        </p>
                     </div>
                 </div>
 

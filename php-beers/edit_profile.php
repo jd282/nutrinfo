@@ -34,8 +34,8 @@
   		$firstname = $_POST["firstname"];
   		$lastname = $_POST["lastname"];
   		$email = $_POST["email"];
-  		$height = $POST["height"]; 
-  		$weight = $POST["weight"];
+        $height = $_POST["height"]; 
+		$weight = $_POST["weight"]; 
 		$minCals = $_POST["minCals"];
     	$maxCals = $_POST["maxCals"];
     	$minFat = $_POST["minFat"];
@@ -48,9 +48,9 @@
     	$maxProtein = $_POST["maxProtein"];
     	
     	//update user table
-    	$update = "UPDATE Users SET user_email=?, user_firstname=?, user_lastname=? WHERE user_id=?" ;
+    	$update = "UPDATE Users SET user_email=?, user_firstname=?, user_lastname=?, user_weight=?, user_height=? WHERE user_id=?" ;
     	$update_result = $dbh->prepare($update);
-    	$update_result->execute(array($email, $firstname, $lastname, $userid));
+    	$update_result->execute(array($email, $firstname, $lastname, $weight, $height, $userid));
     	
     	//Check if user already has existing goals in goals table 
     	$goals_query = "SELECT * FROM Goals Where goals_userid=" . $userid;
@@ -65,7 +65,7 @@
 		else{
     		//if user not in goals table, then insert into goals table
     		$goal_insert = "INSERT INTO Goals(goals_userid, maxCals, maxFat, maxSug, maxSodium, maxProtein, minCals, minFat, minSug, minSodium, minProtein) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    		$goal_result = $dbh->prepare($goal_update); 
+    		$goal_result = $dbh->prepare($goal_insert); 
     		$goal_result->execute(array($userid, $maxCals, $maxFat, $maxSug, $maxSodium, $maxProtein, $minCals, $minFat, $minSug, $minSodium, $minProtein));
     	}
 
@@ -168,7 +168,7 @@
               <div class='input-field col s12'>
                 <p> Please slide to your height (in inches) </p>
                 <p class="range-field">
-                  <input type="range" id="height" min="0" max="96" value='<?php echo $default_height; ?>'/>
+                  <input type="range" name ="height" id="height" min="0" max="96" value='<?php echo $default_height; ?>'required/>
                 </p>
               </div>
             </div>
@@ -181,7 +181,7 @@
               <div class='input-field col s12'>
                 <p> Please slide to your weight (in pounds) </p>
                 <p class="range-field">
-                  <input type="range" id="weight" min="50" max="500" value='<?php echo $default_weight; ?>'/>
+                  <input type="range" name="weight" id="weight" min="50" max="500" value='<?php echo $default_weight; ?>'required/>
                 </p>
               </div>
             </div>
@@ -191,55 +191,55 @@
             <div class='row'>
               <div class='input-field col s2'>
         				<label for='minCals' >Minimum Calories:</label>
-        				<input type='number' name='minCals' id='minCals' min='0' value='<?php echo $default_minCals; ?>'/>
+        				<input type='number' name='minCals' id='minCals' min='0' value='<?php echo $default_minCals; ?>' required/>
               </div>
               <div class='input-field col s2'>
         				<label for='maxCals' >Maximum Calories:</label>
-        				<input type='number' name='maxCals' id='maxCals' maxlength="5" value='<?php echo $default_maxCals; ?>'/>
+        				<input type='number' name='maxCals' id='maxCals' maxlength="5" value='<?php echo $default_maxCals; ?>'required/>
               </div>
             </div>
 
             <div class='row'>
               <div class='input-field col s2'>
         				<label for='minFat' >Minimum Fat:</label>
-        				<input type='number' name='minFat' id='minFat' min='0' value='<?php echo $default_minFat; ?>'/>
+        				<input type='number' name='minFat' id='minFat' min='0' value='<?php echo $default_minFat; ?>'required/>
               </div>
               <div class='input-field col s2'>
         				<label for='maxFat' >Maximum Fat:</label>
-        				<input type='number' name='maxFat' id='maxFat' value='<?php echo $default_maxFat; ?>' />
+        				<input type='number' name='maxFat' id='maxFat' value='<?php echo $default_maxFat; ?>' required/>
               </div>
             </div>
 
             <div class='row'>
               <div class='input-field col s2'>
         				<label for='minSug' >Minimum Sugar:</label>
-        				<input type='number' name='minSug' id='minSug' min='0' value='<?php echo $default_minSug; ?>'/>
+        				<input type='number' name='minSug' id='minSug' min='0' value='<?php echo $default_minSug; ?>'required/>
               </div>
               <div class='input-field col s2'>
         				<label for='maxSug' >Maximum Sugar:</label>
-        				<input type='number' name='maxSug' id='maxSug' value='<?php echo $default_maxSug; ?>' />
+        				<input type='number' name='maxSug' id='maxSug' value='<?php echo $default_maxSug; ?>' required/>
               </div>
             </div>
 
             <div class='row'>
               <div class='input-field col s2'>
         				<label for='minSodium' >Minimum Sodium:</label>
-        				<input type='number' name='minSodium' id='minSodium' min='0' value='<?php echo $default_minSodium; ?>'/>
+        				<input type='number' name='minSodium' id='minSodium' min='0' value='<?php echo $default_minSodium; ?>'required/>
               </div>
               <div class='input-field col s2'>
         				<label for='maxSodium' >Maximum Sodium:</label>
-        				<input type='number' name='maxSodium' id='maxSodium'  value='<?php echo $default_maxSodium; ?>' />
+        				<input type='number' name='maxSodium' id='maxSodium'  value='<?php echo $default_maxSodium; ?>'required />
               </div>
             </div>
 
             <div class='row'>
               <div class='input-field col s2'>
         				<label for='minProtein' >Minimum Protein:</label>
-        				<input type='number' name='minProtein' id='minProtein' min='0' value='<?php echo $default_minFat; ?>'/>
+        				<input type='number' name='minProtein' id='minProtein' min='0' value='<?php echo $default_minFat; ?>'required/>
               </div>
               <div class='input-field col s2'>
         				<label for='maxProtein' >Maximum Protein:</label>
-        				<input type='number' name='maxProtein' id='maxProtein' maxlength="5" value='<?php echo $default_maxProtein; ?>' />
+        				<input type='number' name='maxProtein' id='maxProtein' maxlength="5" value='<?php echo $default_maxProtein; ?>' required/>
               </div>
             </div>
 

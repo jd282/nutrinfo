@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <h2>Login</h2>
             </hgroup>        
         </header>
-        <h3>Invalid email and/or password!</h3>
+        <h3> Invalid email and/or password! </h3>
         <!-- [content] -->
         <div id='form'>
             <section id="content">
