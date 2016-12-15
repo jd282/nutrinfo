@@ -42,7 +42,7 @@
               do {
                 //print $myrow['name'];
                 echo "<li>";
-                	echo "<div class = 'collapsible-header' style='background-color:orange'>" . $myrow['name'] . "</div>"; 
+                	echo "<div class = 'collapsible-header' style='background-color:#FFEB3B'>" . $myrow['name'] . "</div>"; 
                 	echo "<div class = 'collapsible-body' align='center'>";
                   echo "<ul class='collapsible' data-collapsible='accordian' style='width:85%;'>";
                 $r_id = $myrow[0]; 
@@ -54,7 +54,7 @@
                 		//echo $food['name'] . "<br/>";
                 		echo "
                       <li>
-                        <div class='collapsible-header' style='background-color:lightgreen'>" .$food['name'] . "</div>
+                        <div class='collapsible-header' style='background-color:#FF5722; color:#fff'>" .$food['name'] . "</div>
                         <div class='collapsible-body'>";
                   				echo "<table class='striped'>
                   					<thead>
