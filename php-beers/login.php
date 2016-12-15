@@ -1,3 +1,14 @@
+<?php  
+	if(isset($_SESSION)){
+		session_start(); 
+		session_unset();
+		session_destroy();
+		header("Location: login.php");
+		exit; 
+	}
+?>
+
+
 <?php
 $username = null;
 $password = null;

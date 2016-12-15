@@ -1,18 +1,6 @@
 <?php
-  session_start(); 
-  //$foods = $_SESSION['foods'];  
-       // $foods += array($myrow[0]=>$i); 
-        //echo "myrow[0]: " . $myrow[0] . " i=" . $i; 
-        //$_SESSION['foods'] = $foods; 
-
-  /*
-  if (!isset($_POST['food'])) {
-  
-    echo "You need to specify a food. Please <a href='all-restaurants.php'>try again</a>.";
-    die();
-  }
-  $food = $_POST['food'];
-  */
+  session_start();
+  $userid = $_SESSION['user_id'];  
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +32,28 @@
     print "Error connecting to the database: " . $e->getMessage() . "<br/>";
     die();
   }
+  
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  		try{
+    		//delete entry -- this part doesnt work yet 
+   			if(isset($_POST['deleteitem']))
+			{
+  				$delete = $_POST['deleteitem']; 
+  				$delArray = explode(',', $delete);
+  				$foodid = $delArray[0];
+  				$timestamp = $delArray[1]; 
+  				//echo $delete; 
+  		
+  				$q = "DELETE FROM Ate WHERE ate_userid='$userid' AND foodid='$foodid' AND eatdat='$timestamp'"; 
+  				$query = $dbh->query($q); 
+
+			}	
+		}catch (PDOException $e) {
+    	print "Database error: " . $e->getMessage() . "<br/>";
+   	 	die();
+  		}
+    }
+  
   try {
   
   	$date = (string) date('Y-m-d H:i:s'); 
@@ -72,19 +82,8 @@
     		$insert_result = $dbh->query($insert_query); 
     	}
   	}
-    
-    if(isset($_POST['deleteItem']))
-	{
-  		// here comes your delete query: use $_POST['deleteItem'] as your id
- 		// $delete = $_POST['deleteItem']
-  		// $sql = "DELETE FROM `tablename` where `id` = '$delete'"; 
-  		$delte = $_POST['deleteItem']; 
-  		$q = "DELETE FROM Ate WHERE ate_userid='$userid' AND $ate_foodid='$delete'"; 
-  		$query = $dbh->query($q); 
+  	
 
-	}
-    
-    
     //calculate number of calories consumed on current day
 	$cal_query = "SELECT COALESCE(SUM(calories),0) FROM Ate, Food WHERE Food.foodid = Ate.foodid and Ate.eatDate >= '$date2' and ate_userid=" . $userid;
 	$c_query = $dbh->query($cal_query);
@@ -109,7 +108,7 @@
     		<td>" . $row['calories'] . "</td>
     		<td>" . $row[2] . "</td>
     		<form action='student-info.php' method='post'>
-    			<td><a class='btn-floating btn-large waves-effect waves-light red'><i class='material-icons'>delete</i><input type='submit' name='deleteItem' value='".$row[0]."'/></a> </td>
+    			<td><a class='btn-floating btn-large waves-effect waves-light red'><i class='material-icons'>delete</i><input type='submit' id='deleteitem' name='deleteitem' value='".$row[0].",".$row[2] . "'/></a> </td>
     		</form>
     	</tr>
     	";
