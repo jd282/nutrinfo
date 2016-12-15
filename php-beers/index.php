@@ -37,7 +37,7 @@
   <div class='section no-pad-bot' id='index-banner'>
     <div class='container'>
       <br><br>
-      <h1 class='header center orange-text'>Nutri-info</h1>
+      <h1 class='header center orange-text'>Cameron Hungries</h1>
       <div class='row center'>
         <h5 class='header col s12 light'>A place to maintain your health and your food points. All in one place</h5>
       </div>
